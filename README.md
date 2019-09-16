@@ -8,6 +8,7 @@ Godot Version: *3.1.1-stable*
 **This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**  
 
 ## What is this?
+![textedit](textedit.PNG)
 Building...  
 
 ## How does it work?
