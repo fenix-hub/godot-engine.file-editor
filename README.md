@@ -13,3 +13,6 @@ Building...
 
 ## How does it work?
 Building...  
+
+# Want to contact me?  
+I'm planning to create a Discord group to collect each plugin I've made (and I will make), but until then you can directly talk with my via e-mail at *n.santilio97@gmail.com*
