@@ -3,19 +3,16 @@ extends Control
 
 onready var FileList = $FileList
 
-onready var TextEditor = $Container/Editor/TextEditor
-onready var Filename = $Container/Editor/TopBar/Filename
-onready var CloseFile = $Container/Editor/TopBar/close_btn
 onready var Editor = $Container/Editor
 
 onready var OpenFile = $Container/Buttons/openfile_btn
 onready var NewFile = $Container/Buttons/newfile_btn
 onready var DeleteFile = $Container/Buttons/deletefile_btn
 
-onready var SaveFile = $Container/Editor/EditorButtons/savefile_btn
-onready var SaveFileAs = $Container/Editor/EditorButtons/savefileas_btn
+onready var NewFileDialogue = $NewFileDialogue
+onready var NewFileDialogue_name = $NewFileDialogue/VBoxContainer/new_filename
 
-onready var ReadOnly = $Container/Editor/TopBar/Readonly
+var FileScene = load("res://addons/file-editor/scenes/FileScene.tscn")
 
 var DIRECTORY : String = "res://"
 var EXCEPTIONS : String = "addons"
@@ -34,80 +31,70 @@ var EXTENSIONS : PoolStringArray = [
 var directories = []
 var files = []
 
-# -----
-var current_file : File = File.new()
-var current_path : String = ""
-var current_content : String = ""
-# -----
 
 func _ready():
 	OpenFile.connect("pressed",self,"open_selected_file")
-	NewFile.connect("pressed",self,"create_new_file")
+	NewFile.connect("pressed",self,"open_newfiledialogue")
 	DeleteFile.connect("pressed",self,"delete_selected_file")
 	
-	SaveFile.connect("pressed",self,"save_file")
-	SaveFileAs.connect("pressed",self,"save_file_as")
+	NewFileDialogue.connect("confirmed",self,"create_new_file")
 	
-	CloseFile.connect("pressed",self,"close_editor")
 	
-	Filename.set_editable(false)
-	SaveFile.set_disabled(true)
+	FileList.connect("confirmed",self,"update_list")
 	
 	FileList.set_filters(EXTENSIONS)
 	
 	Editor.hide()
 
-func close_editor():
-	Editor.hide()
-	Filename.set_text("")
-	TextEditor.set_text("")
+func open_file(path : String):
+	var current_file : File = File.new()
+	current_file.open(path,File.READ)
+	var current_content = current_file.get_as_text()
+	
+	var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(path))
+	
+	var file_tab = FileScene.instance()
+	Editor.add_child(file_tab)
+	
+	file_tab.new_file_open(path,current_content,last_modified)
+	
+	Editor.show()
+	
 	current_file.close()
-	current_file = File.new()
-	current_path = ""
-	current_content = ""
+	update_list()
 
-func clear_editor():
-	TextEditor.set_text("")
-	Filename.set_text("")
-	current_file = File.new()
+func open_newfiledialogue():
+	NewFileDialogue.popup()
+	NewFileDialogue.set_position(OS.get_screen_size()/2 - NewFileDialogue.get_size()/2)
 
 func create_new_file():
-	close_editor()
-	SaveFile.set_disabled(true)
+	NewFileDialogue.hide()
+	var new_file_tab = FileScene.instance()
+	Editor.add_child(new_file_tab)
+	new_file_tab.new_file_create(NewFileDialogue_name.get_text())
 	Editor.show()
+	update_list()
 
 func open_filelist():
-	FileList.update()
+	update_list()
 	FileList.popup()
 	FileList.set_position(OS.get_screen_size()/2 - FileList.get_size()/2)
 
-func save_file_as():
-	current_content = TextEditor.get_text()
-	FileList.mode = FileDialog.MODE_SAVE_FILE
-	FileList.set_title("Save this file as...")
-	if FileList.is_connected("file_selected",self,"delete_file"):
-		FileList.disconnect("file_selected",self,"delete_file")
-	if not FileList.is_connected("file_selected",self,"open_file"):
-		FileList.connect("file_selected",self,"open_file",[current_content])
-	else:
-		FileList.disconnect("file_selected",self,"open_file")
-		FileList.connect("file_selected",self,"open_file",[current_content])
-	open_filelist()
-
 func open_selected_file():
-	clear_editor()
+	update_list()
 	FileList.mode = FileDialog.MODE_OPEN_FILE
 	FileList.set_title("Select a file you want to edit")
 	if FileList.is_connected("file_selected",self,"delete_file"):
 		FileList.disconnect("file_selected",self,"delete_file")
 	if not FileList.is_connected("file_selected",self,"open_file"):
-		FileList.connect("file_selected",self,"open_file",[""])
+		FileList.connect("file_selected",self,"open_file")
 	else:
 		FileList.disconnect("file_selected",self,"open_file")
-		FileList.connect("file_selected",self,"open_file",[""])
+		FileList.connect("file_selected",self,"open_file")
 	open_filelist()
 
 func delete_selected_file():
+	update_list()
 	FileList.mode = FileDialog.MODE_OPEN_FILE
 	FileList.set_title("Select a file you want to delete")
 	if FileList.is_connected("file_selected",self,"open_file"):
@@ -119,47 +106,11 @@ func delete_selected_file():
 		FileList.connect("file_selected",self,"delete_file")
 	open_filelist()
 
-func open_file(path : String, content_file : String):
-	var content = ""
-	if content_file == "" or content_file == null:
-		current_file.open(path,File.READ)
-		content = current_file.get_as_text()
-	else:
-		content = content_file
-		current_file.open(path,File.WRITE)
-		current_file.store_line(content)
-	
-	TextEditor.set_text(content)
-	Filename.set_text(path)
-	
-	current_file.close()
-	
-	current_path = path
-	current_content = content
-	
-	Editor.show()
-	SaveFile.set_disabled(false)
-
-func save_file():
-	if current_path == "" or current_path == null:
-		save_file_as()
-	else:
-		current_file.open(current_path,File.WRITE)
-		current_content = TextEditor.get_text()
-		if current_content == null:
-			current_content = ""
-		current_file.store_line(current_content)
-		current_file.close()
-
 func delete_file(path : String):
-	clear_editor()
 	var dir = Directory.new()
 	dir.remove(path)
+	
+	update_list()
 
-func _on_Readonly_toggled(button_pressed):
-	if button_pressed:
-		ReadOnly.set_text("Read Only")
-		TextEditor.readonly = (true)
-	else:
-		ReadOnly.set_text("Can Edit")
-		TextEditor.readonly = (false)
+func update_list():
+	FileList.invalidate()
