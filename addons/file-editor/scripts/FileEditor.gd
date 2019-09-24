@@ -12,6 +12,8 @@ onready var DeleteFile = $Container/Buttons/deletefile_btn
 onready var NewFileDialogue = $NewFileDialogue
 onready var NewFileDialogue_name = $NewFileDialogue/VBoxContainer/new_filename
 
+onready var Version = $Container/Buttons/version
+
 var FileScene = load("res://addons/file-editor/scenes/FileScene.tscn")
 
 var DIRECTORY : String = "res://"
@@ -31,7 +33,6 @@ var EXTENSIONS : PoolStringArray = [
 var directories = []
 var files = []
 
-
 func _ready():
 	OpenFile.connect("pressed",self,"open_selected_file")
 	NewFile.connect("pressed",self,"open_newfiledialogue")
@@ -45,6 +46,16 @@ func _ready():
 	FileList.set_filters(EXTENSIONS)
 	
 	Editor.hide()
+	
+	var plugin_version = ""
+	var config =  ConfigFile.new()
+	var err = config.load("res://addons/file-editor/plugin.cfg")
+	if err == OK:
+		plugin_version = config.get_value("plugin","version")
+	update_version("v"+plugin_version)
+
+func update_version(v : String):
+	Version.set_text(v)
 
 func open_file(path : String):
 	var current_file : File = File.new()
