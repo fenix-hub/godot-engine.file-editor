@@ -1,5 +1,3 @@
-!You can delete this file, you'll find it in the *file-editor* folder!  
-
 # Godot Text Editor
 A little plugin to easy-way manage your text files inside your project folder.  
 
