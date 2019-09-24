@@ -1,11 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/file-editor/scripts/FileEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/file-editor/icons/new.svg" type="Texture" id=2]
 [ext_resource path="res://addons/file-editor/icons/file.svg" type="Texture" id=3]
 [ext_resource path="res://addons/file-editor/icons/delete.svg" type="Texture" id=4]
+[ext_resource path="res://addons/file-editor/fonts/Roboto-Black.ttf" type="DynamicFontData" id=5]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="DynamicFont" id=1]
+size = 13
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color( 0.196078, 0.231373, 0.309804, 1 )
@@ -25,7 +30,7 @@ border_width_right = 1
 border_color = Color( 0.121569, 0.145098, 0.192157, 1 )
 expand_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.121569, 0.145098, 0.192157, 1 )
 draw_center = false
 border_width_left = 1
@@ -44,32 +49,40 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Buttons" type="HBoxContainer" parent="Container"]
-editor/display_folded = true
 margin_right = 1024.0
 margin_bottom = 22.0
 
 [node name="newfile_btn" type="Button" parent="Container/Buttons"]
-margin_right = 338.0
+margin_right = 337.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Create new File"
 icon = ExtResource( 2 )
 
 [node name="openfile_btn" type="Button" parent="Container/Buttons"]
-margin_left = 342.0
-margin_right = 680.0
+margin_left = 341.0
+margin_right = 678.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Open File"
 icon = ExtResource( 3 )
 
 [node name="deletefile_btn" type="Button" parent="Container/Buttons"]
-margin_left = 684.0
-margin_right = 1024.0
+margin_left = 682.0
+margin_right = 1019.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Delete File"
 icon = ExtResource( 4 )
+
+[node name="version" type="Label" parent="Container/Buttons"]
+margin_left = 1023.0
+margin_top = 2.0
+margin_right = 1023.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.121569, 0.145098, 0.192157, 1 )
+align = 1
 
 [node name="Editor" type="TabContainer" parent="Container"]
 visible = false
@@ -77,9 +90,9 @@ margin_top = 32.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
-custom_styles/tab_fg = SubResource( 1 )
+custom_styles/tab_fg = SubResource( 2 )
 custom_styles/tab_bg = SubResource( 3 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 4 )
 custom_colors/font_color_fg = Color( 1, 1, 1, 1 )
 tab_align = 0
 drag_to_rearrange_enabled = true

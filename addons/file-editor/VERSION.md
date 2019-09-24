@@ -23,13 +23,21 @@
 **version 0.2.5**
 *removed*  
 - Old layout
- 
------------------------
 
 *added*  
 - New Layout
 - Last modified time and date
 - Tabs
+ 
+-----------------------
+
+**version 0.3.1**  
+*added*  
+- Version check  
+- Preview support
+- Context menu in editor  
+- BBCode converter
+- Light Mardkwon converter (DEMO)
  
 -----------------------
 

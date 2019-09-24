@@ -5,12 +5,10 @@
 [ext_resource path="res://addons/file-editor/icons/edit.png" type="Texture" id=3]
 [ext_resource path="res://addons/file-editor/fonts/Roboto-Black.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color( 0.145098, 0.172549, 0.231373, 1 )
-
-[sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -22,7 +20,9 @@ bg_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 4 )
 
 [node name="filename" type="VBoxContainer"]
@@ -40,7 +40,6 @@ margin_right = 1016.0
 margin_bottom = 4.0
 
 [node name="TopBar" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_top = 8.0
 margin_right = 1016.0
 margin_bottom = 28.0
@@ -53,11 +52,11 @@ margin_bottom = 20.0
 margin_left = 8.0
 margin_right = 51.0
 margin_bottom = 20.0
-custom_styles/hover = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
 text = "File"
 flat = false
-items = [ "Save File", null, 0, false, false, 0, 0, null, "", false, "Save file As...", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "Save File", null, 0, false, false, 0, 0, null, "", false, "Save file As...", null, 0, false, false, 1, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Normal Preview", null, 0, false, false, 2, 0, null, "", false, "BBCode Preview", null, 0, false, false, 3, 0, null, "", false, "Markdown Preview (DEMO)", null, 0, false, false, 4, 0, null, "", false ]
 
 [node name="filepath" type="Label" parent="TopBar"]
 margin_left = 519.0
@@ -90,7 +89,8 @@ highlight_all_occurrences = true
 smooth_scrolling = true
 wrap_enabled = true
 caret_blink = true
-caret_blink_speed = 0.1
+caret_blink_speed = 1.0
+caret_moving_by_right_click = false
 
 [node name="FileInfo" type="HBoxContainer" parent="."]
 editor/display_folded = true
@@ -117,13 +117,13 @@ margin_bottom = 19.0
 size_flags_horizontal = 10
 custom_icons/checked = ExtResource( 2 )
 custom_icons/unchecked = ExtResource( 3 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/hover_pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Can Edit"

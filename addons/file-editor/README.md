@@ -2,7 +2,7 @@
 A little plugin to easy-way manage your text files inside your project folder.  
 
 Author: *"Nicolo (fenix) Santilio"*  
-Version: *0.2.5*  
+Version: *0.3.1*  
 Godot Version: *3.1.1-stable*  
 
 **This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**  
@@ -28,11 +28,12 @@ Then, go to `Project > Plugins > "File Editor" > Status > Activate`.
 You can find this plugin in the AssetLib of Godot Engine Editor. Just download it from there and everything should be fine!  
 (Remember to activate this plugin)  
 
-#### Current version
+### Current version
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
 
-#### Upcoming features
+### Upcoming features
 To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
 
 # Want to contact me?  
 I'm planning to create a Discord group to collect each plugin I've made (and I will make), but until then you can directly talk with my via e-mail at *n.santilio97@gmail.com*  
+

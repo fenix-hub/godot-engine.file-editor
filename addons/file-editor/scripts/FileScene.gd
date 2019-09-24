@@ -17,6 +17,8 @@ onready var FilePath = $TopBar/filepath
 var current_path = ""
 var current_filename = ""
 
+var Preview = load("res://addons/file-editor/scenes/Preview.tscn")
+
 func _ready():
 	FileButton.connect("id_pressed",self,"button_pressed")
 	
@@ -55,6 +57,7 @@ func save_file(current_path : String):
 		current_content = ""
 	current_file.store_line(current_content)
 	current_file.close()
+	
 	var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(current_path))
 	LastModified.set_text(str(last_modified.hour)+":"+str(last_modified.minute)+"  "+str(last_modified.day)+"/"+str(last_modified.month)+"/"+str(last_modified.year))
 	
@@ -84,6 +87,30 @@ func button_pressed(id : int):
 		save_file(current_path)
 	elif id == 1:
 		save_file_as()
+	elif id == 2:
+		open_preview()
+	elif id == 3:
+		bbcode_preview()
+	elif id == 4:
+		markdown_preview()
+
+func open_preview():
+	var preview = Preview.instance()
+	get_parent().get_parent().get_parent().add_child(preview)
+	preview.popup()
+	preview.print_preview(TextEditor.get_text())
+
+func bbcode_preview():
+	var preview = Preview.instance()
+	get_parent().get_parent().get_parent().add_child(preview)
+	preview.popup()
+	preview.print_bb(TextEditor.get_text())
+
+func markdown_preview():
+	var preview = Preview.instance()
+	get_parent().get_parent().get_parent().add_child(preview)
+	preview.popup()
+	preview.print_markdown(TextEditor.get_text())
 
 func close_editor():
 	queue_free()
