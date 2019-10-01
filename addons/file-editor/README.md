@@ -2,7 +2,7 @@
 A little plugin to easy-way manage your text files inside your project folder.  
 
 Author: *"Nicolo (fenix) Santilio"*  
-Version: *0.3.1*  
+Version: *0.3.3*  
 Godot Version: *3.1.1-stable*  
 
 **This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**  
@@ -28,13 +28,28 @@ Then, go to `Project > Plugins > "File Editor" > Status > Activate`.
 You can find this plugin in the AssetLib of Godot Engine Editor. Just download it from there and everything should be fine!  
 (Remember to activate this plugin)  
 
+## Supported formats
++ "*.txt ; Plain Text File", 
++ "*.rtf ; Rich Text Format File", 
++ "*.log ; Log File", 
++ "*.md ; MD File",
++ "*.doc ; WordPad Document",
++ "*.doc ; Microsoft Word Document",
++ "*.docm ; Word Open XML Macro-Enabled Document",
++ "*.docx ; Microsoft Word Open XML Document",
++ "*.bbs ; Bulletin Board System Text",
++ "*.dat ; Data File",
++ "*.xml ; XML File",
++ "*.sql ; SQL database file",
++ "*.json ; JavaScript Object Notation File"  
+
 #### Current version
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
 
 #### Upcoming features
 To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
 
-# ⚠️ Disclaimer  
+# ?? Disclaimer  
 This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.  
 As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.  
 I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
