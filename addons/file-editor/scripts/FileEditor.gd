@@ -28,6 +28,10 @@ var EXTENSIONS : PoolStringArray = [
 "*.docm ; Word Open XML Macro-Enabled Document",
 "*.docx ; Microsoft Word Open XML Document",
 "*.bbs ; Bulletin Board System Text",
+"*.dat ; Data File",
+"*.xml ; XML File",
+"*.sql ; SQL database file",
+"*.json ; JavaScript Object Notation File"
 ]
 
 var directories = []
