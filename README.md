@@ -29,19 +29,19 @@ You can find this plugin in the AssetLib of Godot Engine Editor. Just download i
 (Remember to activate this plugin)  
 
 ## Supported formats
-+"*.txt ; Plain Text File", 
-+"*.rtf ; Rich Text Format File", 
-+"*.log ; Log File", 
-+"*.md ; MD File",
-+"*.doc ; WordPad Document",
-+"*.doc ; Microsoft Word Document",
-+"*.docm ; Word Open XML Macro-Enabled Document",
-+"*.docx ; Microsoft Word Open XML Document",
-+"*.bbs ; Bulletin Board System Text",
-+"*.dat ; Data File",
-+"*.xml ; XML File",
-+"*.sql ; SQL database file",
-+"*.json ; JavaScript Object Notation File"  
++ "*.txt ; Plain Text File", 
++ "*.rtf ; Rich Text Format File", 
++ "*.log ; Log File", 
++ "*.md ; MD File",
++ "*.doc ; WordPad Document",
++ "*.doc ; Microsoft Word Document",
++ "*.docm ; Word Open XML Macro-Enabled Document",
++ "*.docx ; Microsoft Word Open XML Document",
++ "*.bbs ; Bulletin Board System Text",
++ "*.dat ; Data File",
++ "*.xml ; XML File",
++ "*.sql ; SQL database file",
++ "*.json ; JavaScript Object Notation File"  
 
 #### Current version
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
