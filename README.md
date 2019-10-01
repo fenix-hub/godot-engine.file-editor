@@ -17,7 +17,7 @@ You can just *Save* the file, or *Save file As* a new file (if it is a new file 
 You will also be able to see some informations about the file you are editing (time and date of last edit) and you can set your editor to *Read Only* if you don't want to make changes but still read the content of the file.  
 Multiple files can be opened in different tabs.  
 Always remember to save your file when you close the tab!  
-![preview](https://i.imgur.com/7sxxZN9.png)  
+![preview](https://i.imgur.com/RLQoWt8.png)![preview2](https://i.imgur.com/A3kHV1k.png)  
 
 ## How do I install it?
 **Manual**  
