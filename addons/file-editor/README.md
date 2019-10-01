@@ -17,7 +17,7 @@ You can just *Save* the file, or *Save file As* a new file (if it is a new file 
 You will also be able to see some informations about the file you are editing (time and date of last edit) and you can set your editor to *Read Only* if you don't want to make changes but still read the content of the file.  
 Multiple files can be opened in different tabs.  
 Always remember to save your file when you close the tab!  
-![preview](https://i.imgur.com/7sxxZN9.png)  
+![preview](https://i.imgur.com/RLQoWt8.png)![preview2](https://i.imgur.com/A3kHV1k.png)  
 
 ## How do I install it?
 **Manual**  
@@ -28,12 +28,16 @@ Then, go to `Project > Plugins > "File Editor" > Status > Activate`.
 You can find this plugin in the AssetLib of Godot Engine Editor. Just download it from there and everything should be fine!  
 (Remember to activate this plugin)  
 
-### Current version
+#### Current version
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
 
-### Upcoming features
+#### Upcoming features
 To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
+
+# ⚠️ Disclaimer  
+This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.  
+As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.  
+I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
 
 # Want to contact me?  
 I'm planning to create a Discord group to collect each plugin I've made (and I will make), but until then you can directly talk with my via e-mail at *n.santilio97@gmail.com*  
-
