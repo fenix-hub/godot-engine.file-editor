@@ -41,3 +41,9 @@
  
 -----------------------
 
+**version 0.3.3**
+*added* file support:
++ "*.dat ; Data File",
++ "*.xml ; XML File",
++ "*.sql ; SQL database file",
++ "*.json ; JavaScript Object Notation File"  
