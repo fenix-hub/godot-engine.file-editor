@@ -1,3 +1,6 @@
+📣 Check my **[Discord](https://discord.gg/KnJGY9S)** to stay updated on this repository.  
+*(Recommended since the AssetLibrary is not automatically updated)*  
+
 # Godot Text Editor
 A little plugin to easy-way manage your text files inside your project folder.  
 
@@ -53,6 +56,3 @@ To check all the features I'm currently working on, please read the [TODO file](
 This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.  
 As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.  
 I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
-
-# Want to contact me?  
-I'm planning to create a Discord group to collect each plugin I've made (and I will make), but until then you can directly talk with my via e-mail at *n.santilio97@gmail.com*  
