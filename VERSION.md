@@ -37,13 +37,29 @@
 - Preview support
 - Context menu in editor  
 - BBCode converter
-- Light Mardkwon converter (DEMO)
+- Light Mardkwon converter (DEMO)  
+
+-----------------------
+
+**version 1.2.1**  
+*removed*
+- Old layout, the plugin won't appear in docs
+- Icons file extensions, plugin size reduced
+- Old Mardkwon preview method
+
+*added*  
+- More supported files
+1. "*.dat ; Data File",
+2. "*.xml ; XML File",
+3. "*.sql ; SQL database file",
+4. "*.json ; JavaScript Object Notation File",  
+5. "*.html ; HyperText Markup Language
+- New Markdown preview method ( Markdown -> BBCode converter)
+- New HTML preview method ( HTML  -> BBCode converter)
+- New Plugin Layout: a new ButtonTool "File" in you TopBar will appear
+- Error check
+- Message popups for closing unsaved files
  
 -----------------------
 
-**version 0.3.3**
-*added* file support:
-+ "*.dat ; Data File",
-+ "*.xml ; XML File",
-+ "*.sql ; SQL database file",
-+ "*.json ; JavaScript Object Notation File"  
+

@@ -1,11 +1,11 @@
-📣 Check my **[Discord](https://discord.gg/KnJGY9S)** to stay updated on this repository.  
+Check my **[Discord](https://discord.gg/KnJGY9S)** to stay updated on this repository.  
 *(Recommended since the AssetLibrary is not automatically updated)*  
 
 # Godot Text Editor
-A little plugin to easy-way manage your text files inside your project folder.  
+A little plugin to easy-way manage your text files inside your project folder. 
 
 Author: *"Nicolo (fenix) Santilio"*  
-Version: *0.3.3*  
+Version: *1.2.1*  
 Godot Version: *3.1.1-stable*  
 
 **This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**  
@@ -19,8 +19,7 @@ When opening / creating a file, the editor will open and you will be able to edi
 You can just *Save* the file, or *Save file As* a new file (if it is a new file but also to make some copies).  
 You will also be able to see some informations about the file you are editing (time and date of last edit) and you can set your editor to *Read Only* if you don't want to make changes but still read the content of the file.  
 Multiple files can be opened in different tabs.  
-Always remember to save your file when you close the tab!  
-![preview](https://i.imgur.com/RLQoWt8.png)![preview2](https://i.imgur.com/A3kHV1k.png)  
+![preview](https://i.imgur.com/LcrGCGS.png)
 
 ## How do I install it?
 **Manual**  
@@ -44,7 +43,8 @@ You can find this plugin in the AssetLib of Godot Engine Editor. Just download i
 + "*.dat ; Data File",
 + "*.xml ; XML File",
 + "*.sql ; SQL database file",
-+ "*.json ; JavaScript Object Notation File"  
++ "*.json ; JavaScript Object Notation File",  
++ "*.html ; HyperText Markup Language"
 
 #### Current version
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
@@ -52,7 +52,7 @@ To check all the features included in the current version, please read the [VERS
 #### Upcoming features
 To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
 
-# ⚠️ Disclaimer  
+#  Disclaimer  
 This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.  
 As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.  
 I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
