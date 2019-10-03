@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/file-editor/scripts/FileScene.gd" type="Script" id=1]
-[ext_resource path="res://addons/file-editor/icons/read.svg" type="Texture" id=2]
-[ext_resource path="res://addons/file-editor/icons/edit.png" type="Texture" id=3]
-[ext_resource path="res://addons/file-editor/fonts/Roboto-Black.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://addons/file-editor/fonts/Roboto-Black.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color( 0.145098, 0.172549, 0.231373, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -23,25 +23,21 @@ bg_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 [sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="DynamicFont" id=8]
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [node name="filename" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
 size_flags_vertical = 3
 script = ExtResource( 1 )
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_right = 1016.0
+margin_right = 1024.0
 margin_bottom = 4.0
 
 [node name="TopBar" type="HBoxContainer" parent="."]
 margin_top = 8.0
-margin_right = 1016.0
+margin_right = 1024.0
 margin_bottom = 28.0
 
 [node name="VSeparator" type="VSeparator" parent="TopBar"]
@@ -56,31 +52,31 @@ custom_styles/hover = SubResource( 1 )
 custom_styles/normal = SubResource( 1 )
 text = "File"
 flat = false
-items = [ "Save File", null, 0, false, false, 0, 0, null, "", false, "Save file As...", null, 0, false, false, 1, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Normal Preview", null, 0, false, false, 2, 0, null, "", false, "BBCode Preview", null, 0, false, false, 3, 0, null, "", false, "Markdown Preview (DEMO)", null, 0, false, false, 4, 0, null, "", false ]
+items = [ "Save File", null, 0, false, false, 0, 0, null, "", false, "Save file As...", null, 0, false, false, 1, 0, null, "", false, "", null, 0, false, false, -1, 0, null, "", true, "Normal Preview", null, 0, false, false, 2, 0, null, "", false, "BBCode Preview", null, 0, false, false, 3, 0, null, "", false, "Markdown Preview", null, 0, false, false, 4, 0, null, "", false, "HTML Preview", null, 0, false, false, 5, 0, null, "", false ]
 
 [node name="filepath" type="Label" parent="TopBar"]
-margin_left = 519.0
+margin_left = 523.0
 margin_top = 3.0
-margin_right = 519.0
+margin_right = 523.0
 margin_bottom = 17.0
 size_flags_horizontal = 6
 
 [node name="close_btn" type="Button" parent="TopBar"]
-margin_left = 988.0
-margin_right = 1008.0
+margin_left = 996.0
+margin_right = 1016.0
 margin_bottom = 20.0
 size_flags_horizontal = 8
 text = "X"
 
 [node name="VSeparator2" type="VSeparator" parent="TopBar"]
-margin_left = 1012.0
-margin_right = 1016.0
+margin_left = 1020.0
+margin_right = 1024.0
 margin_bottom = 20.0
 
 [node name="TextEditor" type="TextEdit" parent="."]
 margin_top = 32.0
-margin_right = 1016.0
-margin_bottom = 541.0
+margin_right = 1024.0
+margin_bottom = 577.0
 size_flags_vertical = 3
 syntax_highlighting = true
 show_line_numbers = true
@@ -93,30 +89,41 @@ caret_blink_speed = 1.0
 caret_moving_by_right_click = false
 
 [node name="FileInfo" type="HBoxContainer" parent="."]
-editor/display_folded = true
-margin_top = 545.0
-margin_right = 1016.0
-margin_bottom = 564.0
+margin_top = 581.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/separation = 2
+
+[node name="VSeparator4" type="VSeparator" parent="FileInfo"]
+margin_right = 5.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 5, 0 )
+custom_styles/separator = SubResource( 9 )
+
+[node name="lastmodified_icon" type="TextureRect" parent="FileInfo"]
+margin_left = 7.0
+margin_right = 7.0
+margin_bottom = 19.0
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="FileInfo"]
+margin_left = 9.0
 margin_top = 2.0
-margin_right = 125.0
+margin_right = 134.0
 margin_bottom = 16.0
 text = "Last modified time:"
 
 [node name="lastmodified" type="Label" parent="FileInfo"]
-margin_left = 129.0
+margin_left = 136.0
 margin_top = 2.0
-margin_right = 129.0
+margin_right = 136.0
 margin_bottom = 16.0
 
 [node name="Readonly" type="CheckBox" parent="FileInfo"]
-margin_left = 929.0
-margin_right = 1008.0
+margin_left = 939.0
+margin_right = 1018.0
 margin_bottom = 19.0
 size_flags_horizontal = 10
-custom_icons/checked = ExtResource( 2 )
-custom_icons/unchecked = ExtResource( 3 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
@@ -130,6 +137,8 @@ text = "Can Edit"
 flat = true
 
 [node name="VSeparator3" type="VSeparator" parent="FileInfo"]
-margin_left = 1012.0
-margin_right = 1016.0
+margin_left = 1020.0
+margin_right = 1024.0
 margin_bottom = 19.0
+rect_min_size = Vector2( 4, 0 )
+[connection signal="text_changed" from="TextEditor" to="." method="_on_TextEditor_text_changed"]

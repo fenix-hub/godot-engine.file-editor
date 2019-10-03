@@ -1,14 +1,29 @@
 tool
 extends EditorPlugin
 
-var doc
+var doc = preload("../scenes/FileEditor.tscn").instance()
 var plugin_version
+var toolbar
+var fileditorbutton
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd")
 
 func _enter_tree():
-	doc = preload("../scenes/FileEditor.tscn").instance()
-	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_BR,doc)
-
+	add_autoload_singleton("IconLoader","res://addons/file-editor/scripts/IconLoader.gd")
+	get_editor_interface().get_editor_viewport().add_child(doc)
+	doc.hide()
 
 func _exit_tree():
-	remove_control_from_docks(doc)
-	doc.queue_free()
+	get_editor_interface().get_editor_viewport().remove_child(doc)
+	remove_autoload_singleton("IconLoader")
+
+func has_main_screen():
+	return true
+
+func get_plugin_name():
+	return "File"
+
+func get_plugin_icon():
+	return IconLoader.load_icon_from_name("file")
+
+func make_visible(visible):
+	doc.visible = visible

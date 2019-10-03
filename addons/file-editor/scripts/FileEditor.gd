@@ -31,7 +31,8 @@ var EXTENSIONS : PoolStringArray = [
 "*.dat ; Data File",
 "*.xml ; XML File",
 "*.sql ; SQL database file",
-"*.json ; JavaScript Object Notation File"
+"*.json ; JavaScript Object Notation File",
+"*.html ; HyperText Markup Language",
 ]
 
 var directories = []
@@ -41,6 +42,10 @@ func _ready():
 	OpenFile.connect("pressed",self,"open_selected_file")
 	NewFile.connect("pressed",self,"open_newfiledialogue")
 	DeleteFile.connect("pressed",self,"delete_selected_file")
+	
+	NewFile.icon = IconLoader.load_icon_from_name("new")
+	OpenFile.icon = IconLoader.load_icon_from_name("file")
+	DeleteFile.icon =  IconLoader.load_icon_from_name("delete")
 	
 	NewFileDialogue.connect("confirmed",self,"create_new_file")
 	
@@ -83,12 +88,15 @@ func open_newfiledialogue():
 	NewFileDialogue.set_position(OS.get_screen_size()/2 - NewFileDialogue.get_size()/2)
 
 func create_new_file():
-	NewFileDialogue.hide()
-	var new_file_tab = FileScene.instance()
-	Editor.add_child(new_file_tab)
-	new_file_tab.new_file_create(NewFileDialogue_name.get_text())
-	Editor.show()
-	update_list()
+	if NewFileDialogue_name.get_text():
+		NewFileDialogue.hide()
+		var new_file_tab = FileScene.instance()
+		Editor.add_child(new_file_tab)
+		new_file_tab.new_file_create(NewFileDialogue_name.get_text())
+		Editor.show()
+		update_list()
+	else:
+		print("<filename> cannot be empty! Please, give your file a name.")
 
 func open_filelist():
 	update_list()
