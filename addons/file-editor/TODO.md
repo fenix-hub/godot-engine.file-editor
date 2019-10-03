@@ -2,3 +2,5 @@
 - XML Tree Visualizer
 - JSON Tree Visualizer
 - CSV Table Visualizer
+- .cfg support
+- CFG Tree Visualizer
