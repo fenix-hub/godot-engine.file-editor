@@ -62,4 +62,26 @@
  
 -----------------------
 
+**version 1.4.3**  
+*removed*
+- Old layout
 
+*added*  
+- More supported files:
+1. "*.cfg ; Configuration File",
+2. "*.ini ; Initialization File (same as .cfg Configuration File)",
+- Added some sample files
+- Memorize system of last opened files
+- Added *Editor* button , you can now choose which editor to use:
+1. Vanilla Editor (simple text editor)
+2. Cfg/Ini Editor (table editor for Cfg/Ini files)
+		Editors are automatically updated, so if you update a cfg/ini file in the Vanilla Editor it will be updated in the Cfg/Ini Editor, and viceversa
+- Added editor shorcuts:
+1. *Ctrl + N* (new file)
+2. *Ctrl + O* (open file)
+3. *Ctrl + Alt + C* (close file)
+4. *Ctrl + S* (save file)
+5. *Ctrl + Alt + S* (save file as...)
+6. *Ctrl + D* (delete file)
+7. *Ctrl + 1* (Vanilla Editor)
+8. *Ctrl + 3* (Cfg/Ini Editor)
