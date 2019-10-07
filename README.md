@@ -54,7 +54,7 @@ You can find this plugin in the AssetLib of Godot Engine Editor. Just download i
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
 
 #### Upcoming features
-To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
+To check all the features I'm currently working on, please read the ["To Do" Column](https://github.com/fenix-hub/godot-engine.text-editor/projects/1#column-6702439)
 
 #  Disclaimer  
 This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.  
