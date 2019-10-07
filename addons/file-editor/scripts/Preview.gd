@@ -2,15 +2,19 @@ tool
 extends WindowDialog
 
 onready var TextPreview = $Container/TextPreview
+onready var TablePreview = $Container/TablePreview
 
 func _ready():
-	pass
+	TextPreview.hide()
+	TablePreview.hide()
 
 func print_preview(content : String):
 	TextPreview.append_bbcode(content)
+	TextPreview.show()
 
 func print_bb(content : String):
 	TextPreview.append_bbcode(content)
+	TextPreview.show()
 
 func print_markdown(content : String):
 	var result = ""
@@ -49,7 +53,7 @@ func print_markdown(content : String):
 		for res in result:
 			coded.append(res.get_string("coded"))
 	
-	regex.compile("[+-](?<element>\\s.*)")
+	regex.compile("[+-*](?<element>\\s.*)")
 	result = regex.search_all(content)
 	if result:
 		for res in result:
@@ -89,8 +93,11 @@ func print_markdown(content : String):
 			content = content.replace("-"+element,"[indent]-"+element+"[/indent]")
 		if content.find("+ "+element):
 			content = content.replace("+"+element,"[indent]-"+element+"[/indent]")
+		if content.find("* "+element):
+			content = content.replace("+"+element,"[indent]-"+element+"[/indent]")
 	
 	TextPreview.append_bbcode(content)
+	TextPreview.show()
 
 func print_html(content : String):
 	content = content.replace("<i>","[i]")
@@ -99,6 +106,10 @@ func print_html(content : String):
 	content = content.replace("</b>","[/b]")
 	content = content.replace("<u>","[u]")
 	content = content.replace("</u>","[/u]")
+	content = content.replace("<ins>","[u]")
+	content = content.replace("</ins>","[/u]")
+	content = content.replace("<del>","[s]")
+	content = content.replace("</del>","[/s]")
 	content = content.replace('<a href="',"[url=")
 	content = content.replace('">',"]")
 	content = content.replace("</a>","[/url]")
@@ -111,6 +122,21 @@ func print_html(content : String):
 	content = content.replace("</center>","[/center]")
 	
 	TextPreview.append_bbcode(content)
+	TextPreview.show()
+
+func print_csv(rows : Array):
+	TablePreview.columns = rows[0].size()
+	for item in rows:
+		for string in item:
+			var label = Label.new()
+			label.text = str(string)
+			label.set_h_size_flags(SIZE_EXPAND)
+			label.set_align(1)
+			label.set_valign(1)
+			TablePreview.add_child(label)
+	
+	
+	TablePreview.show()
 
 func _on_Preview_popup_hide():
 	queue_free()

@@ -1,6 +1,9 @@
 tool
 extends Node
 
+func _ready():
+	pass
+
 func load_icon_from_name(icon_name : String) -> ImageTexture:
 	var file = File.new()
 	var image = Image.new()
