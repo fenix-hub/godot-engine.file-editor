@@ -25,6 +25,7 @@ font_data = ExtResource( 5 )
 font_data = ExtResource( 6 )
 
 [node name="Preview" type="WindowDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 81.0
@@ -40,8 +41,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TextPreview" type="RichTextLabel" parent="Container"]
+visible = false
 margin_right = 863.0
-margin_bottom = 505.0
+margin_bottom = 250.0
 size_flags_vertical = 3
 custom_fonts/mono_font = SubResource( 1 )
 custom_fonts/bold_italics_font = SubResource( 2 )
@@ -50,4 +52,11 @@ custom_fonts/bold_font = SubResource( 4 )
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 scroll_following = true
+
+[node name="TablePreview" type="GridContainer" parent="Container"]
+margin_right = 863.0
+margin_bottom = 505.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
 [connection signal="popup_hide" from="." to="." method="_on_Preview_popup_hide"]

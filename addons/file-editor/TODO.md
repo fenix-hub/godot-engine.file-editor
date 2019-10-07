@@ -1,6 +1,4 @@
 ### to do (v-0.x.x)  
-- XML Tree Visualizer
-- JSON Tree Visualizer
-- CSV Table Visualizer
-- .cfg support
-- CFG Tree Visualizer
+- Popup dialog when closing a tab if there is new content  
+- Module for markdown support/conversion
+

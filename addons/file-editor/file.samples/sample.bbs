@@ -1,0 +1,8 @@
+[b]bolded text[/b]
+[i]italicized text[/i] 
+[u]underlined text[/u] 
+[s]strikethrough text[/s] 
+[url]https://en.wikipedia.org[/url]
+[url=https://en.wikipedia.org]English Wikipedia[/url] 
+[code]monospaced text[/code]
+left [center]center[/center] [right]right[/right]
