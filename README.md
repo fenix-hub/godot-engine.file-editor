@@ -1,7 +1,7 @@
 Check my **[Discord](https://discord.gg/KnJGY9S)** to stay updated on this repository.  
 *(Recommended since the AssetLibrary is not automatically updated)*  
 
-This plugin is now supported in [Godot Extended Library Discord](https://discord.gg/JNrcucg), check out the [Godot Extended Library Project](https://github.com/godot-extended-libraries)!
+This plugin is now supported in [Godot Extended Libraries Discord](https://discord.gg/JNrcucg), check out the [Godot Extended Libraries Project](https://github.com/godot-extended-libraries)!
 
 # Godot Text Editor
 A little plugin to easy-way manage your text files inside your project folder. 
