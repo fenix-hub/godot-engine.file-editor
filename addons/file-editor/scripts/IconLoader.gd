@@ -1,6 +1,11 @@
 tool
 extends Node
 
+signal image_downloaded()
+signal image_completed()
+
+var imgBuffer
+
 func _ready():
 	pass
 

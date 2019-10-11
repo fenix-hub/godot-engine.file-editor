@@ -12,13 +12,16 @@ onready var EditorBTN = $FileEditorContainer/TobBar/editor_btn.get_popup()
 
 onready var Version = $FileEditorContainer/TobBar/version
 
-onready var VanillaEditor = $FileEditorContainer/SplitContainer/VanillaEditor
-onready var IniEditor = $FileEditorContainer/SplitContainer/IniEditor
 
-onready var OpenFileList = $FileEditorContainer/SplitContainer/BoxContainer/OpenFileList
-onready var OpenFileName = $FileEditorContainer/SplitContainer/BoxContainer/OpenFileName
+onready var FileContainer = $FileEditorContainer/SplitContainer/FileContainer
+onready var OpenFileList = $FileEditorContainer/SplitContainer/FileContainer/OpenFileList
+onready var OpenFileName = $FileEditorContainer/SplitContainer/FileContainer/OpenFileName
 
 var Preview = preload("res://addons/file-editor/scenes/Preview.tscn")
+var IniEditor = preload("res://addons/file-editor/scenes/IniEditor.tscn")
+var VanillaEditor = preload("res://addons/file-editor/scenes/VanillaEditor.tscn")
+
+onready var EditorContainer = $FileEditorContainer/SplitContainer
 
 var DIRECTORY : String = "res://"
 var EXCEPTIONS : String = "addons"
@@ -47,6 +50,8 @@ var files = []
 var current_file_index = -1
 var current_file_path = ""
 var save_as = false
+var current_editor : Control 
+var current_ini_editor : Control
 
 func _ready():
 	clean_editor()
@@ -55,13 +60,11 @@ func _ready():
 	create_shortcuts()
 	load_icons()
 	
-	
 	var opened_files : Array = LastOpenedFiles.load_opened_files()
 	for open_file in opened_files:
 		open_file(open_file[1])
 	
 	FileList.set_filters(EXTENSIONS)
-	IniEditor.hide()
 
 func create_shortcuts():
 	var hotkey 
@@ -98,6 +101,16 @@ func create_shortcuts():
 	hotkey.alt = true
 	FileBTN.set_item_accelerator(2,hotkey.get_scancode_with_modifiers()) # close file
 	
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_F
+	hotkey.control = true
+	FileBTN.set_item_accelerator(8,hotkey.get_scancode_with_modifiers()) # search
+	
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_R
+	hotkey.control = true
+	FileBTN.set_item_accelerator(9,hotkey.get_scancode_with_modifiers()) # replace
+	
 	# vanilla editor -----------------------
 	
 	hotkey = InputEventKey.new()
@@ -123,10 +136,8 @@ func connect_signals():
 	
 	OpenFileList.connect("item_selected",self,"_on_fileitem_pressed")
 	
-	VanillaEditor.connect("text_changed",self,"_on_vanillaeditor_text_changed")
-	
 	#---------------- to update from IniEditor to VanillaEditor
-	IniEditor.connect("update_file",self,"_on_update_file")
+	
 	
 	# ---- preview buttons
 	
@@ -208,6 +219,10 @@ func _on_filebtn_pressed(index : int):
 				save_current_file_as()
 		5:
 			delete_selected_file()
+		6:
+			current_editor.open_searchbox()
+		7:
+			current_editor.open_replacebox()
 
 func _on_previewbtn_pressed(id : int):
 	if id == 0:
@@ -226,13 +241,13 @@ func _on_previewbtn_pressed(id : int):
 func _on_editorbtn_pressed(index : int):
 	match index:
 		0:
-			if not VanillaEditor.visible:
-				VanillaEditor.show()
-				IniEditor.hide()
+			if not current_editor.visible:
+				current_editor.show()
+				current_ini_editor.hide()
 		2:
-			if not IniEditor.visible:
-				VanillaEditor.hide()
-				IniEditor.show()
+			if not current_ini_editor.visible:
+				current_editor.hide()
+				current_ini_editor.show()
 
 func _on_fileitem_pressed(index : int):
 	current_file_index = index
@@ -241,14 +256,39 @@ func _on_fileitem_pressed(index : int):
 	
 	OpenFileName.set_text(current_file_path)
 	
-	VanillaEditor.new_file_open(selected_item_metadata[0],selected_item_metadata[1])
-	open_in_inieditor(current_file_path)
+	if current_ini_editor!= null:
+		if not current_ini_editor.visible:
+			for editor in get_tree().get_nodes_in_group("vanilla_editor"):
+				if editor.current_path != current_file_path:
+					editor.hide()
+				else:
+					current_editor = editor
+					editor.show()
+		else:
+			var ext =  current_file_path.get_file().get_extension()
+			if ext == "cfg" or ext == "ini":
+				for editor in get_tree().get_nodes_in_group("ini_editor"):
+					if editor.current_file_path != current_file_path:
+						editor.hide()
+					else:
+						current_ini_editor = editor
+						editor.show()
+			else:
+				current_ini_editor.hide()
+				for editor in get_tree().get_nodes_in_group("vanilla_editor"):
+					if editor.current_path != current_file_path:
+						editor.hide()
+					else:
+						current_editor = editor
+						editor.show()
+	else:
+		for editor in get_tree().get_nodes_in_group("vanilla_editor"):
+			if editor.current_path != current_file_path:
+				editor.hide()
+			else:
+				current_editor = editor
+				editor.show()
 
-func close_file(index):
-	LastOpenedFiles.remove_opened_file(index,OpenFileList)
-	OpenFileList.remove_item(index)
-	OpenFileName.clear()
-	VanillaEditor.clean_editor()
 
 func open_file(path : String):
 	if current_file_path != path:
@@ -258,12 +298,25 @@ func open_file(path : String):
 		open_in_inieditor(path)
 		
 		LastOpenedFiles.store_opened_files(OpenFileList)
+	current_editor.show()
 
 func open_in_vanillaeditor(path : String):
+	var editor = VanillaEditor.instance()
+	EditorContainer.add_child(editor,true)
+	
+	current_editor = editor
+	
+	for editor in get_tree().get_nodes_in_group("vanilla_editor"):
+		if editor != current_editor:
+			editor.hide()
+	
+	editor.connect("text_changed",self,"_on_vanillaeditor_text_changed")
+	
 	var current_file : File = File.new()
 	current_file.open(path,File.READ)
+	var current_content = ""
+	current_content = current_file.get_as_text()
 	
-	var current_content = current_file.get_as_text()
 	var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(path))
 	
 	current_file.close()
@@ -273,7 +326,7 @@ func open_in_vanillaeditor(path : String):
 	current_file_index = OpenFileList.get_item_count()-1
 	OpenFileList.set_item_metadata(current_file_index,[current_content,last_modified,path])
 	
-	VanillaEditor.new_file_open(current_content,last_modified)
+	editor.new_file_open(current_content,last_modified,current_file_path)
 	
 	update_list()
 	
@@ -282,7 +335,12 @@ func open_in_vanillaeditor(path : String):
 func open_in_inieditor(path : String):
 	var extension = path.get_file().get_extension()
 	if extension == "ini" or extension == "cfg":
-		IniEditor.current_file_path = path
+		var inieditor = IniEditor.instance()
+		EditorContainer.add_child(inieditor)
+		inieditor.hide()
+		inieditor.connect("update_file",self,"_on_update_file")
+		current_ini_editor = inieditor
+		inieditor.current_file_path = path
 		var current_file : ConfigFile = ConfigFile.new()
 		var err = current_file.load(path)
 		if err == OK:
@@ -296,13 +354,19 @@ func open_in_inieditor(path : String):
 				
 				filemap.append([section,keys])
 			
-			IniEditor.open_file(filemap)
-	else:
-		IniEditor.clean_editor()
+			inieditor.open_file(filemap)
 
+func close_file(index):
+	LastOpenedFiles.remove_opened_file(index,OpenFileList)
+	OpenFileList.remove_item(index)
+	OpenFileName.clear()
+	current_editor.queue_free()
+	
+	OpenFileList.select(OpenFileList.get_item_count()-1)
+	_on_fileitem_pressed(OpenFileList.get_item_count()-1)
 
 func _on_update_file():
-	VanillaEditor.clean_editor()
+	current_editor.clean_editor()
 	var current_file : File = File.new()
 	current_file.open(current_file_path,File.READ)
 	
@@ -311,7 +375,7 @@ func _on_update_file():
 	
 	current_file.close()
 	
-	VanillaEditor.new_file_open(current_content,last_modified)
+	current_editor.new_file_open(current_content,last_modified)
 
 func delete_file(files_selected : PoolStringArray):
 	var dir = Directory.new()
@@ -329,15 +393,11 @@ func open_filelist():
 	FileList.popup()
 	FileList.set_position(OS.get_screen_size()/2 - FileList.get_size()/2)
 
-func _on_vanillaeditor_text_changed():
-	if not OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
-		OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index)+"(*)")
-
 func create_new_file(given_path : String):
 	var current_file = File.new()
 	current_file.open(given_path,File.WRITE)
 	if save_as : 
-		current_file.store_line(VanillaEditor.get_node("TextEditor").get_text())
+		current_file.store_line(current_editor.get_node("TextEditor").get_text())
 	current_file.close()
 	
 	open_file(given_path)
@@ -345,17 +405,18 @@ func create_new_file(given_path : String):
 func save_file(current_path : String):
 	var current_file = File.new()
 	current_file.open(current_path,File.WRITE)
-	var current_content = VanillaEditor.get_node("TextEditor").get_text()
-	if current_content == null:
-		current_content = ""
-	current_file.store_line(current_content)
+	var current_content = ""
+	var lines = current_editor.get_node("TextEditor").get_line_count()
+	for line in range(0,lines):
+		current_content = current_editor.get_node("TextEditor").get_text()
+		current_file.store_line(current_editor.get_node("TextEditor").get_line(line))
 	current_file.close()
 	
 	current_file_path = current_file_path
 	
 	var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(current_path))
 	
-	VanillaEditor.update_lastmodified(last_modified,"save")
+	current_editor.update_lastmodified(last_modified,"save")
 	OpenFileList.set_item_metadata(current_file_index,[current_content,last_modified,current_path])
 	
 	if OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
@@ -367,18 +428,20 @@ func save_file(current_path : String):
 func clean_editor():
 	OpenFileName.clear()
 	OpenFileList.clear()
-	VanillaEditor.clean_editor()
-	IniEditor.clean_editor()
+	for inieditor in get_tree().get_nodes_in_group("ini_editor"):
+		inieditor.queue_free()
+	for vanillaeditor in get_tree().get_nodes_in_group("vanilla_editor"):
+		vanillaeditor.queue_free()
 
 func csv_preview():
 	var preview = Preview.instance()
 	get_parent().get_parent().get_parent().add_child(preview)
 	preview.popup()
 	preview.window_title += " ("+current_file_path.get_file()+")"
-	var lines = VanillaEditor.get_node("TextEditor").get_line_count()
+	var lines = current_editor.get_node("TextEditor").get_line_count()
 	var rows = []
 	for i in range(0,lines-1):
-		rows.append(VanillaEditor.get_node("TextEditor").get_line(i).rsplit(",",false))
+		rows.append(current_editor.get_node("TextEditor").get_line(i).rsplit(",",false))
 	preview.print_csv(rows)
 
 func bbcode_preview():
@@ -386,27 +449,33 @@ func bbcode_preview():
 	get_parent().get_parent().get_parent().add_child(preview)
 	preview.popup()
 	preview.window_title += " ("+current_file_path.get_file()+")"
-	preview.print_bb(VanillaEditor.get_node("TextEditor").get_text())
+	preview.print_bb(current_editor.get_node("TextEditor").get_text())
 
 func markdown_preview():
 	var preview = Preview.instance()
 	get_parent().get_parent().get_parent().add_child(preview)
 	preview.popup()
 	preview.window_title += " ("+current_file_path.get_file()+")"
-	preview.print_markdown(VanillaEditor.get_node("TextEditor").get_text())
+	preview.print_markdown(current_editor.get_node("TextEditor").get_text())
 
 func html_preview():
 	var preview = Preview.instance()
 	get_parent().get_parent().get_parent().add_child(preview)
 	preview.popup()
 	preview.window_title += " ("+current_file_path.get_file()+")"
-	preview.print_html(VanillaEditor.get_node("TextEditor").get_text())
+	preview.print_html(current_editor.get_node("TextEditor").get_text())
 
 func xml_preview():
 	pass
 
 func json_preview():
 	pass
+
+
+func _on_vanillaeditor_text_changed():
+	if not OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
+		OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index)+"(*)")
+
 
 func update_list():
 	FileList.invalidate()

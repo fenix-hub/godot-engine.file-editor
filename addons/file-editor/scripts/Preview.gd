@@ -4,6 +4,11 @@ extends WindowDialog
 onready var TextPreview = $Container/TextPreview
 onready var TablePreview = $Container/TablePreview
 
+signal image_downloaded()
+signal image_loaded()
+
+var imgBuffer : Image
+
 func _ready():
 	TextPreview.hide()
 	TablePreview.hide()
@@ -26,6 +31,7 @@ func print_markdown(content : String):
 	var images = []
 	var links = []
 	var lists = []
+	var underlined = []
 	
 	var regex = RegEx.new()
 	regex.compile('\\*\\*(?<boldtext>.*)\\*\\*')
@@ -34,6 +40,11 @@ func print_markdown(content : String):
 		for res in result:
 			bolded.append(res.get_string("boldtext"))
 	
+	regex.compile('\\_\\_(?<underlinetext>.*)\\_\\_')
+	result = regex.search_all(content)
+	if result:
+		for res in result:
+			underlined.append(res.get_string("underlinetext"))
 	
 	regex.compile("\\*(?<italictext>.*)\\*")
 	result = regex.search_all(content)
@@ -80,6 +91,8 @@ func print_markdown(content : String):
 		content = content.replace("*"+italic+"*","[i]"+italic+"[/i]")
 	for strik in striked:
 		content = content.replace("~~"+strik+"~~","[s]"+strik+"[/s]")
+	for underline in underlined:
+		content = content.replace("__"+underline+"__","[u]"+underline+"[/u]")
 	for code in coded:
 		content = content.replace("`"+code+"`","[code]"+code+"[/code]")
 	for image in images:
