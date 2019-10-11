@@ -6,9 +6,9 @@ This plugin is now supported in [Godot Extended Library Discord](https://discord
 # Godot Text Editor
 A little plugin to easy-way manage your text files inside your project folder. 
 
-Author: *"Nicolo (fenix) Santilio"*  
-Version: *1.4.3*  
-Godot Version: *3.1.1-stable*  
+Author: *"Nicolo (fenix) Santilio"*
+Version: *1.6.0*
+Godot Version: *3.1.1-stable*
 
 **This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**  
 
@@ -21,7 +21,7 @@ When opening / creating a file, the editor will open and you will be able to edi
 You can just *Save* the file, or *Save file As* a new file (if it is a new file but also to make some copies).  
 You will also be able to see some informations about the file you are editing (time and date of last edit) and you can set your editor to *Read Only* if you don't want to make changes but still read the content of the file.  
 Multiple files can be opened in different tabs.  
-![preview1](https://i.imgur.com/mlh1rOX.png)![preview2](https://i.imgur.com/od5nQff.png)
+![preview1](https://i.imgur.com/BbZzKzD.png)![preview2](https://i.imgur.com/asggk4f.png) ![preview3](https://i.imgur.com/omReRZr.png) 
 
 ## How do I install it?
 **Manual**  
@@ -60,4 +60,10 @@ To check all the features I'm currently working on, please read the [TODO file](
 This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.  
 As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.  
 I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
+
+
+
+
+
+
 

@@ -4,5 +4,9 @@
 [s]strikethrough text[/s] 
 [url]https://en.wikipedia.org[/url]
 [url=https://en.wikipedia.org]English Wikipedia[/url] 
+[img]res://addons/file-editor/icon.png[/img]
 [code]monospaced text[/code]
 left [center]center[/center] [right]right[/right]
+
+
+*Some md text in bb file*

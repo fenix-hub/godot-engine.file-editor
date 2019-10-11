@@ -28,7 +28,7 @@ func _ready():
 	load_icons()
 	clean_editor()
 	
-	
+	add_to_group("ini_editor")
 	
 #	var metadata = [["name","Godot Engine"],["version","1.0.0"],["color","Light Blue"]]
 #	load_section("Engine", metadata)
