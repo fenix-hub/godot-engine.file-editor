@@ -53,7 +53,7 @@
 2. "*.xml ; XML File",
 3. "*.sql ; SQL database file",
 4. "*.json ; JavaScript Object Notation File",  
-5. "*.html ; HyperText Markup Language
+5. "*.html ; HyperText Markup Language",
 - New Markdown preview method ( Markdown -> BBCode converter)
 - New HTML preview method ( HTML  -> BBCode converter)
 - New Plugin Layout: a new ButtonTool "File" in you TopBar will appear
@@ -85,3 +85,15 @@
 6. *Ctrl + D* (delete file)
 7. *Ctrl + 1* (Vanilla Editor)
 8. *Ctrl + 3* (Cfg/Ini Editor)
+
+-----------------------
+
+**version 1.6.0**
+*fixed*
+- Each opened file now has own editor: unsaved changes are no longer erased if a new file is opened without saving the previous opened file
+
+*added*
+- Custom Syntax Highlighting for each file type (.md, .cfg/.ini, .html, .bbs)
+- Characters counter in VanillaEditor
+- String searcher in VanillaEditor (with custom shortcut *Ctrl + F*)
+- String replacer in VanillaEditor (with custom shortcut *Ctrl + R*)  
