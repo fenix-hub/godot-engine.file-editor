@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://addons/file-editor/scripts/FileScene.gd" type="Script" id=1]
+[ext_resource path="res://addons/file-editor/scripts/VanillaEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/file-editor/fonts/Roboto-Black.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -23,6 +23,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextEditor" type="TextEdit" parent="."]
 margin_right = 1024.0
@@ -60,8 +63,7 @@ breakpoint_gutter = true
 highlight_all_occurrences = true
 override_selected_font_color = true
 smooth_scrolling = true
-hiding_enabled = 1
-wrap_enabled = true
+hiding_enabled = true
 caret_blink = true
 caret_blink_speed = 1.0
 caret_moving_by_right_click = false
