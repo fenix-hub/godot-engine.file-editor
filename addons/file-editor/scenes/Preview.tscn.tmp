@@ -41,6 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TextPreview" type="RichTextLabel" parent="Container"]
+visible = false
 margin_right = 863.0
 margin_bottom = 505.0
 size_flags_vertical = 3

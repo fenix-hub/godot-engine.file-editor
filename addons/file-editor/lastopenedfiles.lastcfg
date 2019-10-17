@@ -1,4 +1,9 @@
 [Opened]
 
-VERSION.md="res://addons/file-editor/VERSION.md"
-README.md="res://addons/file-editor/README.md"
+sample.md="res://addons/file-editor/file.samples/sample.md"
+sample.bbs="res://addons/file-editor/file.samples/sample.bbs"
+sample.ini="res://addons/file-editor/file.samples/sample.ini"
+sample.cfg="res://addons/file-editor/file.samples/sample.cfg"
+sample.csv="res://addons/file-editor/file.samples/sample.csv"
+sample.txt="res://addons/file-editor/file.samples/sample.txt"
+sample.html="res://addons/file-editor/file.samples/sample.html"

@@ -10,7 +10,7 @@ func store_opened_files(filecontainer : Control):
 	var file = ConfigFile.new()
 	file.load(lastopenedfile_path)
 	for child in range(0,filecontainer.get_item_count()):
-		var filepath = filecontainer.get_item_metadata(child)[2]
+		var filepath = filecontainer.get_item_metadata(child)[0].current_path
 		file.set_value("Opened",filepath.get_file(),filepath)
 	
 	file.save(lastopenedfile_path)
@@ -18,7 +18,7 @@ func store_opened_files(filecontainer : Control):
 func remove_opened_file(index : int , filecontainer : Control):
 	var file = ConfigFile.new()
 	file.load(lastopenedfile_path)
-	var filepath = filecontainer.get_item_metadata(index)[2]
+	var filepath = filecontainer.get_item_metadata(index)[0].current_path
 	file.set_value("Opened",filepath.get_file(),null)
 	file.save(lastopenedfile_path)
 

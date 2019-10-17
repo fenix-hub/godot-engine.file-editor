@@ -133,6 +133,8 @@ func print_html(content : String):
 	content = content.replace("</pre>","[/code]")
 	content = content.replace("<center>","[center]")
 	content = content.replace("</center>","[/center]")
+	content = content.replace("<right>","[right]")
+	content = content.replace("</right>","[/right]")
 	
 	TextPreview.append_bbcode(content)
 	TextPreview.show()

@@ -2,10 +2,8 @@ tool
 extends EditorPlugin
 
 var doc = preload("../scenes/FileEditor.tscn").instance()
-var plugin_version
-var toolbar
-var fileditorbutton
-var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd")
+
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
 
 func _enter_tree():
 	add_autoload_singleton("IconLoader","res://addons/file-editor/scripts/IconLoader.gd")

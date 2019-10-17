@@ -1,5 +1,6 @@
-extends Control
 tool
+extends Control
+
 
 onready var Keys = $VBoxContainer/HSplitContainer/VBoxContainer2/keys
 onready var Sections = $VBoxContainer/HSplitContainer/VBoxContainer/sections2

@@ -187,7 +187,7 @@ margin_right = 211.0
 margin_bottom = 22.0
 text = "Preview"
 icon = SubResource( 6 )
-items = [ "BBCode Preview", null, 0, false, false, 0, 0, null, "", false, "Markdown Preview", null, 0, false, false, 1, 0, null, "", false, "HTML Preview", null, 0, false, false, 2, 0, null, "", false, "CSV Preview", null, 0, false, false, 3, 0, null, "", false, "XML Preview", null, 0, false, false, 4, 0, null, "", false, "JSON Preview", null, 0, false, false, 5, 0, null, "", false ]
+items = [ "BBCode Preview", null, 0, false, false, 0, 0, null, "", false, "Markdown Preview", null, 0, false, false, 1, 0, null, "", false, "HTML Preview", null, 0, false, false, 2, 0, null, "", false, "XML Preview", null, 0, false, false, 4, 0, null, "", false, "JSON Preview", null, 0, false, false, 5, 0, null, "", false ]
 
 [node name="version" type="Label" parent="FileEditorContainer/TobBar"]
 margin_left = 961.0
@@ -197,7 +197,7 @@ margin_bottom = 19.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.121569, 0.145098, 0.192157, 1 )
-text = "v1.6.0"
+text = "v1.6.2"
 align = 1
 
 [node name="SplitContainer" type="HSplitContainer" parent="FileEditorContainer"]
