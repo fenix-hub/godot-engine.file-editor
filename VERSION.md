@@ -103,7 +103,7 @@
 **version 1.6.4**
 *added*
 - CSV VisualEditor (shortcut *Ctrl+2*):
-	- you can now read and edit CSV files which importing them as simple CSV files (and not translate file)  
+	- you can now read and edit CSV files importing them as simple CSV files (and not translate file)  
 - MiniMap drawer in VanillaEditor
 - SoftWrap / NoWrap in VanillaEditor
 - **Version 3.2alpha2 supported**
