@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/file-editor/scripts/Preview.gd" type="Script" id=1]
 [ext_resource path="res://addons/file-editor/fonts/COUR.TTF" type="DynamicFontData" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://addons/file-editor/fonts/Carlito-Italic.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://addons/file-editor/fonts/Carlito-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://addons/file-editor/fonts/Carlito-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://new_richtexteffect.tres" type="RichTextEffect" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 use_mipmaps = true
@@ -41,6 +40,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TextPreview" type="RichTextLabel" parent="Container"]
+visible = false
 margin_right = 863.0
 margin_bottom = 505.0
 size_flags_vertical = 3
@@ -51,7 +51,6 @@ custom_fonts/bold_font = SubResource( 4 )
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 scroll_following = true
-custom_effects = [ ExtResource( 7 ) ]
 
 [node name="TablePreview" type="GridContainer" parent="Container"]
 visible = false
