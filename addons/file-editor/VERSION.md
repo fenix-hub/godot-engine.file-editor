@@ -107,3 +107,8 @@
 - MiniMap drawer in VanillaEditor
 - SoftWrap / NoWrap in VanillaEditor
 - **Version 3.2alpha2 supported**
+
+---------------------
+
+**version 1.7.1**
+- several bug fixes

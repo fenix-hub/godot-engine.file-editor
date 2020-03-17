@@ -1,7 +1,7 @@
 tool
 extends EditorPlugin
 
-var doc = preload("../scenes/FileEditor.tscn")
+#var doc = preload("../scenes/FileEditor.tscn")
 
 var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
 
@@ -10,12 +10,12 @@ var FileEditor
 func _enter_tree():
 	add_autoload_singleton("IconLoader","res://addons/file-editor/scripts/IconLoader.gd")
 	add_autoload_singleton("LastOpenedFiles","res://addons/file-editor/scripts/LastOpenedFiles.gd")
-	FileEditor = doc.instance()
+	FileEditor = preload("../scenes/FileEditor.tscn").instance()
 	get_editor_interface().get_editor_viewport().add_child(FileEditor)
 	FileEditor.hide()
 
 func _exit_tree():
-	FileEditor.clean_editor()
+#	FileEditor.clean_editor()
 	remove_autoload_singleton("IconLoader")
 	remove_autoload_singleton("LastOpenedFiles")
 	get_editor_interface().get_editor_viewport().remove_child(FileEditor)

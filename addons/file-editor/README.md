@@ -7,8 +7,8 @@ This plugin is now supported in [Godot Extended Library Discord](https://discord
 A little plugin to easy-way manage your text files inside your project folder. 
 
 Author: *"Nicolo (fenix) Santilio"*  
-Version: *1.6.4*  
-Godot Version: *3.2alpha2*  
+Version: *1.7.1*  
+Godot Version: *3.2.1*  
 
 **This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**  
 
