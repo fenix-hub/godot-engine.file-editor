@@ -20,6 +20,9 @@ onready var SplitEditorContainer = $FileEditorContainer/SplitContainer/EditorCon
 onready var WrapBTN = $FileEditorContainer/SplitContainer/EditorContainer/HBoxContainer/wrap_button
 onready var MapBTN = $FileEditorContainer/SplitContainer/EditorContainer/HBoxContainer/map_button
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.gd").new()
+
 var Preview = preload("res://addons/file-editor/scenes/Preview.tscn")
 var IniEditor = preload("res://addons/file-editor/scenes/IniEditor.tscn")
 var VanillaEditor = preload("res://addons/file-editor/scenes/VanillaEditor.tscn")
@@ -59,7 +62,10 @@ var current_editor : Control
 var current_ini_editor : Control
 var current_csv_editor : Control
 
+
+
 func _ready():
+	
 	clean_editor()
 	update_version()
 	connect_signals()

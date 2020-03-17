@@ -1,6 +1,9 @@
 tool
 extends Control
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.gd").new()
+
 onready var Table = $Editor/TableContainer/ScrollContainer/Table
 onready var AlignBTN = $Editor/Buttons/align_bt.get_popup()
 onready var EditBTN = $Editor/Buttons/edit_bt.get_popup()
