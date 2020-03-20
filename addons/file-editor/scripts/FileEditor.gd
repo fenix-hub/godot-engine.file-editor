@@ -20,6 +20,9 @@ onready var SplitEditorContainer = $FileEditorContainer/SplitContainer/EditorCon
 onready var WrapBTN = $FileEditorContainer/SplitContainer/EditorContainer/HBoxContainer/wrap_button
 onready var MapBTN = $FileEditorContainer/SplitContainer/EditorContainer/HBoxContainer/map_button
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.gd").new()
+
 var Preview = preload("res://addons/file-editor/scenes/Preview.tscn")
 var IniEditor = preload("res://addons/file-editor/scenes/IniEditor.tscn")
 var VanillaEditor = preload("res://addons/file-editor/scenes/VanillaEditor.tscn")
@@ -59,7 +62,10 @@ var current_editor : Control
 var current_ini_editor : Control
 var current_csv_editor : Control
 
+
+
 func _ready():
+	
 	clean_editor()
 	update_version()
 	connect_signals()
@@ -156,6 +162,7 @@ func update_version():
 	if err == OK:
 		plugin_version = config.get_value("plugin","version")
 	Version.set_text("v"+plugin_version)
+	print(plugin_version)
 
 func create_selected_file():
 	update_list()
@@ -238,6 +245,8 @@ func _on_previewbtn_pressed(id : int):
 		markdown_preview()
 	elif id == 2:
 		html_preview()
+	elif id == 3:
+		csv_preview()
 	elif id == 4:
 		xml_preview()
 	elif id == 5:
@@ -556,3 +565,7 @@ func on_minimap_button(index:int):
 			current_editor.draw_minimap(false)
 		1:
 			current_editor.draw_minimap(true)
+
+func check_file_preview(file : String):
+	# check whether the opened file has a corresponding preview session for its extension
+	 pass

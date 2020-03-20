@@ -1,6 +1,8 @@
 tool
 extends Control
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.gd").new()
 
 onready var Keys = $VBoxContainer/HSplitContainer/VBoxContainer2/keys
 onready var Sections = $VBoxContainer/HSplitContainer/VBoxContainer/sections2

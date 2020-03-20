@@ -8,8 +8,6 @@ content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=9]
-
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
@@ -22,7 +20,9 @@ bg_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="DynamicFont" id=9]
 font_data = ExtResource( 2 )
 
 [node name="filename" type="VBoxContainer"]
@@ -98,7 +98,7 @@ custom_constants/separation = 2
 margin_right = 5.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 5, 0 )
-custom_styles/separator = SubResource( 9 )
+custom_styles/separator = SubResource( 2 )
 
 [node name="lastmodified_icon" type="TextureRect" parent="FileInfo"]
 margin_left = 7.0
@@ -124,13 +124,13 @@ margin_left = 939.0
 margin_right = 1018.0
 margin_bottom = 19.0
 size_flags_horizontal = 10
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/hover_pressed = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_fonts/font = SubResource( 8 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/hover_pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Can Edit"

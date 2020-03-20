@@ -1,6 +1,9 @@
 tool
 extends WindowDialog
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.gd").new()
+
 onready var TextPreview = $Container/TextPreview
 onready var TablePreview = $Container/TablePreview
 

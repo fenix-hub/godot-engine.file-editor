@@ -1,6 +1,8 @@
 tool
 extends VBoxContainer
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.gd").new()
 
 onready var ReadOnly = $FileInfo/Readonly
 
