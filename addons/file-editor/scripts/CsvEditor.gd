@@ -7,11 +7,14 @@ var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.
 onready var Table = $Editor/TableContainer/ScrollContainer/Table
 onready var AlignBTN = $Editor/Buttons/align_bt.get_popup()
 onready var EditBTN = $Editor/Buttons/edit_bt.get_popup()
+onready var OptionsBTN = $Editor/Buttons/options_btn.get_popup()
 onready var FileInfo = $Editor/FileInfo
 onready var ReadOnly = $Editor/FileInfo/Readonly
 
 onready var Horizontal = $Editor/Horizontal
 onready var Vertical = $Editor/TableContainer/Vertical
+
+onready var ChangeDelimiterDialog = $ChangeDelimiterDialog
 
 var current_file_path : String = ""
 
@@ -31,7 +34,11 @@ func _ready():
 func connect_signals():
 	AlignBTN.connect("id_pressed",self,"on_align_pressed")
 	EditBTN.connect("id_pressed",self,"on_edit_pressed")
+	OptionsBTN.connect("id_pressed",self,"on_options_pressed")
 	ReadOnly.connect("toggled",self,"_on_Readonly_toggled")
+	ChangeDelimiterDialog.connect("confirmed",self,"on_changedelimiter_confirmed")
+	
+	connect("visibility_changed",self,"_on_visibility_changed")
 
 func load_icons():
 	$Editor/Buttons/align_bt.set_button_icon(IconLoader.load_icon_from_name("align"))
@@ -64,6 +71,7 @@ func open_csv_file(filepath : String, csv_delimiter : String) -> void:
 	load_file_in_table(rows,columns)
 	ReadOnly.pressed = (true)
 	$Editor/FileInfo/delimiter.set_text(csv_delimiter)
+	ChangeDelimiterDialog.get_node("VBoxContainer/delim_read").set_text(csv_delimiter)
 
 func load_file_in_table(rows : Array, columns : int) -> void:
 	Table.set_columns(columns)
@@ -120,6 +128,11 @@ func on_edit_pressed(index :int) -> void:
 			add_column(rows)
 		3:
 			save_table()
+
+func on_options_pressed(index : int) -> void:
+	match index:
+		0:
+			ChangeDelimiterDialog.popup()
 
 func table_ruler(rows : int, columns : int):
 	for child in Vertical.get_children():
@@ -179,7 +192,24 @@ func save_table():
 	var file = File.new()
 	file.open(filepath, File.WRITE)
 	for line in content:
-		file.store_csv_line(line,"|")
+		file.store_csv_line(line,csv_delimiter)
 	file.close()
 	
 	emit_signal("update_file")
+
+func on_changedelimiter_confirmed():
+	change_delimiter(ChangeDelimiterDialog.get_node("VBoxContainer/delim_read").get_text())
+
+func change_delimiter(delim : String):
+	csv_delimiter = delim
+	reload()
+
+func reload():
+	for element in Table.get_children():
+		element.queue_free()
+	open_csv_file(current_file_path,csv_delimiter)
+	FileInfo.show()
+
+func _on_visibility_changed():
+	if visible:
+		reload()
