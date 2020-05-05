@@ -49,6 +49,8 @@ func connect_signals():
 	BtnAddKey.connect("pressed",self,"_on_addkey_pressed")
 	BtnRemoveKey.connect("pressed",self,"_on_removekey_pressed")
 	BtnEditKey.connect("pressed",self,"_on_editkey_pressed")
+	
+	connect("visibility_changed",self,"_on_visibility_changed")
 
 func create_table_names():
 	create_root()
@@ -275,3 +277,7 @@ func create_root():
 	root = Keys.create_item()
 	root.set_text(0,"KEY_NAME")
 	root.set_text(1,"KEY_VALUE")
+
+func _on_visibility_changed():
+	if visible:
+		pass
