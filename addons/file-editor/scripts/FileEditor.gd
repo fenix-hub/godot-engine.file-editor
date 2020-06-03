@@ -51,6 +51,7 @@ var EXTENSIONS : PoolStringArray = [
 "*.cfg ; Configuration File",
 "*.ini ; Initialization File (same as .cfg Configuration File)",
 "*.csv ; Comma-separated values File",
+"*.res ; Resource File",
 ]
 
 var directories = []
