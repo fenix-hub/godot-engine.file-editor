@@ -1,4 +1,4 @@
-[![version](https://img.shields.io/badge/plugin%20version-1.7.1-blue)](https://github.com/fenix-hub/godot-engine.text-editor)
+[![version](https://img.shields.io/badge/plugin%20version-1.7.1-blue)](https://github.com/fenix-hub/godot-engine.file-editor)
 [![updates](https://img.shields.io/badge/plugin%20updates-on%20discord-purple)](https://discord.gg/JNrcucg)
 [![paypal](https://img.shields.io/badge/donations-PayPal-cyan)](https://paypal.me/NSantilio?locale.x=it_IT)
 
@@ -9,7 +9,7 @@ This plugin is now supported in [Godot Extended Library Discord](https://discord
 
 <img src="addons/file-editor/icon.png" width="64" height="64" align="left">
 
-# Godot Text Editor
+# Godot File Editor
 A little plugin to easy-way manage your text files inside your project folder. 
 
 Author: *"Nicolo (fenix) Santilio"*  
