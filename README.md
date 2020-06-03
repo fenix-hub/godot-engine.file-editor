@@ -55,7 +55,8 @@ You can find this plugin in the AssetLib of Godot Engine Editor. Just download i
 + "*.html ; HyperText Markup Language"
 + "*.cfg ; Configuration File"
 + "*.ini ; Initialization File (same as .cfg Configuration File)"  
-+ "*.csv ; Comma-separated values File"
++ "*.csv ; Comma-separated values File"  
++ "*.res ; Resource File"
 
 #### Current version
 To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
