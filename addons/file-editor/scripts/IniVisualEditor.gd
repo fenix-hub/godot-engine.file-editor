@@ -17,7 +17,7 @@ onready var BtnRemoveKey = $VBoxContainer/HSplitContainer/VBoxContainer2/HBoxCon
 onready var Section = $Section
 onready var Key = $Key
 
-var selected_key 
+var selected_key
 var selected_section : int = -1
 var root : TreeItem
 

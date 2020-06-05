@@ -33,9 +33,9 @@ onready var EditorContainer = $FileEditorContainer/SplitContainer
 var DIRECTORY : String = "res://"
 var EXCEPTIONS : String = "addons"
 var EXTENSIONS : PoolStringArray = [
-"*.txt ; Plain Text File", 
-"*.rtf ; Rich Text Format File", 
-"*.log ; Log File", 
+"*.txt ; Plain Text File",
+"*.rtf ; Rich Text Format File",
+"*.log ; Log File",
 "*.md ; MD File",
 "*.doc ; WordPad Document",
 "*.doc ; Microsoft Word Document",
@@ -59,7 +59,7 @@ var files = []
 var current_file_index = -1
 var current_file_path = ""
 var save_as = false
-var current_editor : Control 
+var current_editor : Control
 var current_ini_editor : Control
 var current_csv_editor : Control
 
@@ -80,7 +80,7 @@ func _ready():
 	FileList.set_filters(EXTENSIONS)
 
 func create_shortcuts():
-	var hotkey 
+	var hotkey
 	
 	hotkey = InputEventKey.new()
 	hotkey.scancode = KEY_S

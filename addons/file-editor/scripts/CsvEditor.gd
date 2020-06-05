@@ -18,7 +18,7 @@ onready var ChangeDelimiterDialog = $ChangeDelimiterDialog
 
 var current_file_path : String = ""
 
-var rows : int 
+var rows : int
 var columns : int
 var csv_delimiter : String
 var filepath : String
@@ -90,7 +90,7 @@ func add_row(columns : int, cell_text : String = "", cell2text : PoolStringArray
 			if ReadOnly.pressed:
 				cell.set_editable(false)
 		
-		else: 
+		else:
 			if cell2text[i]!="":
 				var cell = LineEdit.new()
 				cell.set_h_size_flags(2)
