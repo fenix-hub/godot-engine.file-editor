@@ -1,72 +1,72 @@
-**version 0.0.1**  
-*added*  
-- Plugin Created  
- 
+**version 0.0.1**
+*added*
+- Plugin Created
+
 -----------------------
 
-**version 0.1.1**  
-*added*  
+**version 0.1.1**
+*added*
 - "Create new File" option
 - "Open File" option
 - "Delete File" option
 - "Save File" option
 - "Save File As.." option
- 
+
 -----------------------
 
-**version 0.1.2**  
-*fixed*  
-- Repository Installation, folder order  
- 
+**version 0.1.2**
+*fixed*
+- Repository Installation, folder order
+
 -----------------------
 
 **version 0.2.5**
-*removed*  
+*removed*
 - Old layout
 
-*added*  
+*added*
 - New Layout
 - Last modified time and date
 - Tabs
- 
+
 -----------------------
 
-**version 0.3.1**  
-*added*  
-- Version check  
+**version 0.3.1**
+*added*
+- Version check
 - Preview support
-- Context menu in editor  
+- Context menu in editor
 - BBCode converter
-- Light Mardkwon converter (DEMO)  
+- Light Mardkwon converter (DEMO)
 
 -----------------------
 
-**version 1.2.1**  
+**version 1.2.1**
 *removed*
 - Old layout, the plugin won't appear in docs
 - Icons file extensions, plugin size reduced
 - Old Mardkwon preview method
 
-*added*  
+*added*
 - More supported files
 1. "*.dat ; Data File",
 2. "*.xml ; XML File",
 3. "*.sql ; SQL database file",
-4. "*.json ; JavaScript Object Notation File",  
+4. "*.json ; JavaScript Object Notation File",
 5. "*.html ; HyperText Markup Language",
 - New Markdown preview method ( Markdown -> BBCode converter)
 - New HTML preview method ( HTML  -> BBCode converter)
 - New Plugin Layout: a new ButtonTool "File" in you TopBar will appear
 - Error check
 - Message popups for closing unsaved files
- 
+
 -----------------------
 
-**version 1.4.3**  
+**version 1.4.3**
 *removed*
 - Old layout
 
-*added*  
+*added*
 - More supported files:
 1. "*.cfg ; Configuration File",
 2. "*.ini ; Initialization File (same as .cfg Configuration File)",
@@ -96,14 +96,14 @@
 - Custom Syntax Highlighting for each file type (.md, .cfg/.ini, .html, .bbs)
 - Characters counter in VanillaEditor
 - String searcher in VanillaEditor (with custom shortcut *Ctrl + F*)
-- String replacer in VanillaEditor (with custom shortcut *Ctrl + R*)  
+- String replacer in VanillaEditor (with custom shortcut *Ctrl + R*)
 
 -----------------------
 
 **version 1.6.4**
 *added*
 - CSV VisualEditor (shortcut *Ctrl+2*):
-	- you can now read and edit CSV files which importing them as simple CSV files (and not translate file)  
+	- you can now read and edit CSV files which importing them as simple CSV files (and not translate file)
 - MiniMap drawer in VanillaEditor
 - SoftWrap / NoWrap in VanillaEditor
 - **Version 3.2alpha2 supported**
