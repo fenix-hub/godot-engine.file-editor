@@ -63,7 +63,9 @@ func open_csv_file(filepath : String, csv_delimiter : String) -> void:
 	var rows : Array = []
 	var columns = -1
 	while not csv.eof_reached():
-		rows.append(csv.get_csv_line(csv_delimiter))
+		var csv_line = csv.get_csv_line(csv_delimiter)
+		if Array(csv_line) != [""]:
+			rows.append(csv_line)
 		if columns == -1:
 			columns = rows[0].size()
 	csv.close()
@@ -91,17 +93,17 @@ func add_row(columns : int, cell_text : String = "", cell2text : PoolStringArray
 				cell.set_editable(false)
 		
 		else:
-			if cell2text[i]!="":
-				var cell = LineEdit.new()
-				cell.set_h_size_flags(2)
-				cell.set_h_size_flags(3)
-				Table.add_child(cell)
-				if cell2text:
-					cell.set_text(cell2text[i])
-				else:
-					cell.set_text(cell_text)
-				if ReadOnly.pressed:
-					cell.set_editable(false)
+#			if cell2text[i]!="":
+			var cell = LineEdit.new()
+			cell.set_h_size_flags(2)
+			cell.set_h_size_flags(3)
+			Table.add_child(cell)
+			if cell2text:
+				cell.set_text(cell2text[i])
+			else:
+				cell.set_text(cell_text)
+			if ReadOnly.pressed:
+				cell.set_editable(false)
 
 func add_column(rows : int ,cell_text : String  = ""):
 	for i in range(0,rows):
