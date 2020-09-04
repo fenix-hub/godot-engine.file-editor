@@ -1,4 +1,3 @@
-
 # Godot-specific ignores
 .import/
 
@@ -13,5 +12,9 @@ mono_crash.*.json
 # System/tool-specific ignores
 .directory
 *~
-*.psd
-*.ttf
+
+# Plugin specific ignores
+icons.pngs/
+fonts/
+file.samples/
+icon.png
