@@ -70,9 +70,9 @@ caret_moving_by_right_click = false
 
 [node name="SearchBox" type="HBoxContainer" parent="."]
 visible = false
-margin_top = 525.0
+margin_top = 553.0
 margin_right = 1024.0
-margin_bottom = 549.0
+margin_bottom = 577.0
 
 [node name="Label" type="Label" parent="SearchBox"]
 margin_top = 5.0
