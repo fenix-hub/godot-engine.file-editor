@@ -40,6 +40,13 @@ func _ready():
 	
 	add_to_group("vanilla_editor")
 
+func set_font(font_path : String) -> void:
+	var dynamic_font : DynamicFont = DynamicFont.new()
+	var dynamic_font_data : DynamicFontData = DynamicFontData.new()
+	dynamic_font_data.set_font_path(font_path)
+	dynamic_font.set_font_data(dynamic_font_data)
+	TextEditor.set("custom_fonts/font",dynamic_font)
+
 func set_wrap_enabled(enabled:bool):
 	TextEditor.set_wrap_enabled(enabled)
 	TextEditor.update()
