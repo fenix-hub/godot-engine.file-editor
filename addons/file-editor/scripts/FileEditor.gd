@@ -66,9 +66,7 @@ var current_ini_editor : Control
 var current_csv_editor : Control
 var current_font : DynamicFont
 
-
 func _ready():
-	
 	clean_editor()
 	update_version()
 	connect_signals()
@@ -361,7 +359,7 @@ func open_file(path : String, font : String = "null"):
 		current_file_path = path
 		
 		var vanilla_editor = open_in_vanillaeditor(path)
-		if font != "null":
+		if font != "null" and vanilla_editor.get("custom_fonts/font")!=null:
 			vanilla_editor.set_font(font)
 		var ini_editor = open_in_inieditor(path)
 		var csv_editor = open_in_csveditor(path)
@@ -372,47 +370,42 @@ func open_file(path : String, font : String = "null"):
 	current_editor.show()
 
 func generate_file_item(path : String , veditor : Control , inieditor : Control, csveditor : Control):
-		OpenFileName.set_text(path)
-		OpenFileList.add_item(path.get_file(),IconLoader.load_icon_from_name("file"),true)
-		current_file_index = OpenFileList.get_item_count()-1
-		OpenFileList.set_item_metadata(current_file_index,[veditor,inieditor,csveditor])
-		OpenFileList.select(OpenFileList.get_item_count()-1)
+	OpenFileName.set_text(path)
+	OpenFileList.add_item(path.get_file(),IconLoader.load_icon_from_name("file"),true)
+	current_file_index = OpenFileList.get_item_count()-1
+	OpenFileList.set_item_metadata(current_file_index,[veditor,inieditor,csveditor])
+	OpenFileList.select(OpenFileList.get_item_count()-1)
 
 func open_in_vanillaeditor(path : String) -> Control:
-		var editor = VanillaEditor.instance()
-		SplitEditorContainer.add_child(editor,true)
-		
-		if current_editor and current_editor!=editor:
-				editor.show()
-				current_editor.hide()
-		if current_csv_editor and current_csv_editor.visible:
-				current_csv_editor.hide()
-		if current_ini_editor and current_ini_editor.visible:
-				current_ini_editor.hide()
-		
-		current_editor = editor
-		
-		
-		editor.connect("text_changed",self,"_on_vanillaeditor_text_changed")
-		
-		var current_file : File = File.new()
-		current_file.open(path,File.READ)
-		var current_content = ""
-		current_content = current_file.get_as_text()
-		
-		var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(path))
-		
-		current_file.close()
-		
-		editor.new_file_open(current_content,last_modified,current_file_path)
-		
-		update_list()
-		
-		if WrapBTN.get_selected_id() == 1:
-				current_editor.set_wrap_enabled(true)
-		
-		
-		return editor
+	var editor = VanillaEditor.instance()
+	SplitEditorContainer.add_child(editor,true)
+	
+	if current_editor and current_editor!=editor:
+		editor.show()
+		current_editor.hide()
+	if current_csv_editor and current_csv_editor.visible:
+		current_csv_editor.hide()
+	if current_ini_editor and current_ini_editor.visible:
+		current_ini_editor.hide()
+	
+	current_editor = editor
+	editor.connect("text_changed",self,"_on_vanillaeditor_text_changed")
+	
+	var current_file : File = File.new()
+	current_file.open(path,File.READ)
+	var current_content = ""
+	current_content = current_file.get_as_text()
+	
+	var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(path))
+	
+	current_file.close()
+	editor.new_file_open(current_content,last_modified,current_file_path)
+	update_list()
+	
+	if WrapBTN.get_selected_id() == 1:
+		current_editor.set_wrap_enabled(true)
+	
+	return editor
 
 func open_in_inieditor(path : String) -> Control:
 		var extension = path.get_file().get_extension()

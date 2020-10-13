@@ -25,7 +25,6 @@ var current_path = ""
 var current_filename = ""
 var Preview = load("res://addons/file-editor/scenes/Preview.tscn")
 
-
 var search_flag = 0
 
 signal text_changed()
@@ -39,6 +38,7 @@ func _ready():
 	ReadOnly.set("custom_icons/unchecked",IconLoader.load_icon_from_name("edit"))
 	
 	add_to_group("vanilla_editor")
+	load_default_font()
 
 func set_font(font_path : String) -> void:
 	var dynamic_font : DynamicFont = DynamicFont.new()
@@ -46,6 +46,11 @@ func set_font(font_path : String) -> void:
 	dynamic_font_data.set_font_path(font_path)
 	dynamic_font.set_font_data(dynamic_font_data)
 	TextEditor.set("custom_fonts/font",dynamic_font)
+
+func load_default_font() -> void:
+	var default_font = LastOpenedFiles.get_editor_font()
+	if default_font:
+		set_font(default_font)
 
 func set_wrap_enabled(enabled:bool):
 	TextEditor.set_wrap_enabled(enabled)
