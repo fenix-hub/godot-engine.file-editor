@@ -16,7 +16,7 @@ Author: *"Nicolo (fenix) Santilio"*
 Version: *1.7.6*  
 Godot Version: *3.2.3*  
 
-**This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**
+**This repository was pushed directly from Godot Engine Editor thanks to this [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**
 
 ## What is this?
 This is a little plugin I've made to easily edit text files in your project folder.
@@ -59,12 +59,12 @@ You can find this plugin in the AssetLib of Godot Engine Editor. Just download i
 + "*.res ; Resource File"
 
 #### Current version
-To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
+To check all the features that are included in the current version, please read the [VERSION file](./VERSION.md)
 
 #### Upcoming features
 To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
 
 #  Disclaimer
-This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.
+This addon was built for the intention of my **personal use**. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.
 As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.
 I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
