@@ -67,6 +67,8 @@ var current_csv_editor : Control
 var current_font : DynamicFont
 
 func _ready():
+	if not Engine.is_editor_hint():
+		return
 	clean_editor()
 	update_version()
 	connect_signals()
@@ -167,7 +169,6 @@ func update_version():
 		if err == OK:
 				plugin_version = config.get_value("plugin","version")
 		Version.set_text("v"+plugin_version)
-		print(plugin_version)
 
 func create_selected_file():
 		update_list()
