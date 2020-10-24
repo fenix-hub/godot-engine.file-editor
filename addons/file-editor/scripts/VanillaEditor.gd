@@ -10,9 +10,9 @@ onready var TextEditor = $TextEditor
 
 onready var LastModified = $FileInfo/lastmodified
 
-onready var FileList = get_parent().get_parent().get_parent().get_parent().get_node("FileList")
+var FileList
 
-onready var ClosingFile = get_parent().get_parent().get_parent().get_parent().get_node("ConfirmationDialog")
+var ClosingFile
 
 onready var LastModifiedIcon = $FileInfo/lastmodified_icon
 
@@ -30,6 +30,8 @@ var search_flag = 0
 signal text_changed()
 
 func _ready():
+	FileList = get_parent().get_parent().get_parent().get_parent().get_node("FileList")
+	ClosingFile = get_parent().get_parent().get_parent().get_parent().get_node("ConfirmationDialog")
 	ClosingFile.connect("confirmed",self,"queue_free")
 	
 	ReadOnly.connect("toggled",self,"_on_Readonly_toggled")

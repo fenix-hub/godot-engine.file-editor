@@ -7,6 +7,8 @@
 [ext_resource path="res://addons/file-editor/fonts/Carlito-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://addons/file-editor/fonts/Carlito-Regular.ttf" type="DynamicFontData" id=6]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 use_mipmaps = true
 use_filter = true
