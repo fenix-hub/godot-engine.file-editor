@@ -1,9 +1,8 @@
-[![version](https://img.shields.io/badge/plugin%20version-1.7.6-blue)](https://github.com/fenix-hub/godot-engine.file-editor)
-[![updates](https://img.shields.io/badge/plugin%20updates-on%20discord-purple)](https://discord.gg/JNrcucg)
-[![paypal](https://img.shields.io/badge/donations-PayPal-cyan)](https://paypal.me/NSantilio?locale.x=it_IT)
-
-Check my **[Discord](https://discord.gg/KnJGY9S)** to stay updated on this repository.
-*(Recommended since the AssetLibrary is not automatically updated)*
+<p align="right">
+<a href="https://discord.gg/KnJGY9S">
+  <img src="https://github.com/fenix-hub/ColoredBadges/blob/master/svg/social/discord.svg" alt="react" style="vertical-align:top; margin:6px 4px">
+</a>
+</p>
 
 This plugin is now supported in [Godot Extended Library Discord](https://discord.gg/JNrcucg), check out the [Godot Extended Library Project](https://github.com/godot-extended-libraries)!
 
