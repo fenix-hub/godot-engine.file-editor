@@ -31,20 +31,30 @@ onready var editor_columns_length : LineEdit = editor_settings.get_node("EditorS
 onready var editor_columns_spacing : LineEdit = editor_settings.get_node("EditorSettings/ColumnsSpacing/ColumnsSpacingLine")
 onready var editor_rows_spacing : LineEdit = editor_settings.get_node("EditorSettings/RowsSpacing/RowsSpacingLine")
 
+onready var translation_dialog : WindowDialog = $TranslationDialog
+onready var token_line : LineEdit = $TranslationDialog/TranslationContainer/AuthToken/TokenLine
+onready var keys_tree : Tree = $TranslationDialog/TranslationContainer/Keys/ScrollContainer/KeysTree
+onready var source_lang_menu : OptionButton = $TranslationDialog/TranslationContainer/Languages/SourceLangMenu
+onready var target_langs_tree : Tree = $TranslationDialog/TranslationContainer/Languages/TargetLangs/TargetLangsTree
+
 var current_file_path : String
 
 var file_path : String
 var csv_delimiter : String = ","
-var columns_count : int = 0
-var rows_count : int = 0
+var columns_count : int = 1
+var rows_count : int = 1
 
 signal update_file()
+
+var GoogleTranslate : GoogleTranslateAPI = GoogleTranslateAPI.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_connect_signals()
 	_load_icons()
 	_add_shortcuts()
+	
+	add_child(GoogleTranslate)
 
 func _add_shortcuts() -> void:
 	var hotkey
@@ -73,9 +83,15 @@ func _connect_signals() -> void:
 	editor_settings.connect("confirmed", self, "_on_editor_settings_confirmed")
 	
 	$EditDialog/Options/Columns/LessBtn.connect("pressed", self, "_on_less_pressed")
-	$EditDialog/Options/Rows/LessBtn.connect("pressed", self, "_on_less_pressed")	
+	$EditDialog/Options/Rows/LessBtn.connect("pressed", self, "_on_less_pressed")
 	$EditDialog/Options/Columns/MoreBtn.connect("pressed", self, "_on_more_pressed")
 	$EditDialog/Options/Rows/MoreBtn.connect("pressed", self, "_on_more_pressed")
+	
+	$TranslationDialog/TranslationContainer/AuthToken/SecretCheck.connect("toggled", self, "_on_secret_check")
+	$TranslationDialog/TranslationContainer/Buttons/AcceptBtn.connect("pressed", self, "_on_translation_accept")
+	source_lang_menu.connect("item_selected", self , "_on_source_lang_selected")
+	
+#	GoogleTranslate.connect("translation_received", self, "_on_translation_received")
 
 func _load_icons() -> void:
 	$Container/Menu/AlignMenu.set_button_icon(IconLoader.load_icon_from_name("align"))
@@ -93,6 +109,56 @@ func _load_icons() -> void:
 	
 	readonly_btn.set("custom_icons/checked",IconLoader.load_icon_from_name("read"))
 	readonly_btn.set("custom_icons/unchecked",IconLoader.load_icon_from_name("edit"))
+
+func _on_secret_check(toggled : bool) -> void:
+	token_line.set_secret(toggled)
+
+func _on_translation_accept() -> void:
+	var token : String = token_line.get_text()
+	if token in ["", " "]:
+		print("An Auth Token is required in order to make translate requests to Google Translate API.")
+		translation_dialog.hide()
+		return
+	GoogleTranslate.set_token(token)
+	
+	var source_lang_idx : int = langs.find(source_lang_menu.get_text()) if source_lang_menu.get_selected() == -1 else source_lang_menu.get_selected()
+	source_lang_idx += 2 # + zero_column + "keys" column
+	
+	var target_langs_idx : Array = []
+	var first_lang : TreeItem = target_langs_tree.get_root().get_children()
+	get_checked(first_lang, target_langs_idx, langs)
+	for lang in range(0, langs.size()-1):
+		first_lang = get_checked(first_lang.get_next(), target_langs_idx, langs)
+	
+	var selected_keys_idx : Array = []
+	var first_key : TreeItem = keys_tree.get_root().get_children()
+	get_checked(first_key, selected_keys_idx, keys)
+	for key in range(0, keys.size()-1):
+		first_key = get_checked(first_key.get_next(), selected_keys_idx, keys)
+	
+	var target_keys : Array = []
+	for key_idx in selected_keys_idx:
+		target_keys.append(Columns.get_child(source_lang_idx).get_child(key_idx).get_text().replace("\"",""))
+	
+	for lang_idx in target_langs_idx:
+		GoogleTranslate.request_translation(
+			Columns.get_child(source_lang_idx).get_child(1).get_text(),
+			Columns.get_child(lang_idx).get_child(1).get_text(),
+			target_keys
+		)
+		var response : Dictionary = yield(GoogleTranslate, "translation_received")
+		var translation_table : Array = response.data.translations
+		var i : int = 0
+		for key in selected_keys_idx:
+			Columns.get_child(lang_idx).get_child(key).set_text("\"%s\""%translation_table[i].translatedText)
+			i+=1
+	
+	translation_dialog.hide()
+
+func get_checked(tree_item : TreeItem, idx_array : Array, source_array : Array) -> TreeItem:
+	if tree_item.is_checked(0):
+		idx_array.append(source_array.find(tree_item.get_text(0)) + 2)
+	return tree_item
 
 func _on_align_pressed(id : int) -> void:
 	for column in range(1, columns_count+1):
@@ -117,13 +183,85 @@ func _on_edit_pressed(id : int) -> void:
 	
 	edit_dialog.popup()
 
+var keys : Array = []
+var langs : Array = []
+#var source_lang : String = ""
+
+func load_translation_table() -> void:
+	keys.clear()
+	langs.clear()
+	for column in range(2, columns_count+1):
+		langs.append(Columns.get_child(column).get_child(1).get_text())
+	for row in range(2, rows_count+1):
+		keys.append(Columns.get_child(1).get_child(row).get_text())
+	
+	create_key_tree(keys)
+	load_source_lang(langs)
+	create_lang_tree(langs)
+
+func load_source_lang(langs : Array) -> void:
+	source_lang_menu.clear()
+	var lang_popup : PopupMenu = source_lang_menu.get_popup()
+	for lang in langs:
+		lang_popup.add_item(lang)
+	source_lang_menu.set_text(langs[0])
+
+func create_key_tree(keys : Array) -> void:
+	keys_tree.clear()
+	keys_tree.set_column_titles_visible(true)
+	keys_tree.set_column_title(0, "Keys to translate")
+	var root : TreeItem = keys_tree.create_item()
+	for key in keys:
+		var child : TreeItem = keys_tree.create_item(root)
+		child.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
+		child.set_editable(0, true)
+		child.set_text(0, key)
+
+func create_lang_tree(target_langs : Array) -> void:
+#	target_langs_tree.set_column_titles_visible(true)
+#	target_langs_tree.set_column_title(0, "Keys to translate")
+	target_langs_tree.clear()
+	var root : TreeItem = target_langs_tree.create_item()
+	for lang in target_langs:
+		var child : TreeItem = target_langs_tree.create_item(root)
+		child.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
+		child.set_editable(0, true)
+		child.set_text(0, lang)
+	
+	disable_source_lang(target_langs)
+
+func disable_source_lang(langs : Array) -> void:
+	var first_lang : TreeItem = target_langs_tree.get_root().get_children()
+	check_source_target_lang(first_lang)
+	for lang in range(0, langs.size()-1):
+		first_lang = check_source_target_lang(first_lang.get_next())
+
+func check_source_target_lang(target : TreeItem) -> TreeItem :
+	if target.get_text(0) == source_lang_menu.get_text() :
+		target.set_checked(0, false)
+		target.set_editable(0, false)
+		target.set_selectable(0, false)
+		target.set_custom_bg_color(0, Color("64373737"))
+	else:
+		target.set_editable(0, true)
+		target.set_selectable(0, true)
+		target.set_custom_bg_color(0, Color.transparent)
+	return target
+
+
+func _on_source_lang_selected(idx : int) -> void:
+	disable_source_lang(langs)
+
 func _on_settings_pressed(id : int) -> void:
 	match id:
-		0: # Change Columns Size
+		0: # Change CSV Editor Settings
 			editor_columns_length.set_text(str(Columns.get_child(1).get_child(1).get_size().x))
 			editor_columns_spacing.set_text(str(Columns.get("custom_constants/separation")))
 			editor_rows_spacing.set_text(str(Columns.get_child(1).get("custom_constants/separation")))
 			editor_settings.popup()
+		1:
+			load_translation_table()
+			translation_dialog.popup()
 
 func _on_editor_settings_confirmed() -> void:
 	for column in range(0, columns_count+1):
@@ -146,8 +284,8 @@ func _on_more_pressed() -> void:
 
 func _on_edit_confirmed() -> void:
 	# Add new Columns
-	if edit_columns.is_visible(): 
-		var ref_column : VBoxContainer = Columns.get_child(columns_count).duplicate(8)
+	if edit_columns.is_visible():
+		var ref_column : VBoxContainer = _zero_column.duplicate(8)
 		for row in ref_column.get_children():
 			row.set_text("")
 		var new_columns : int = new_columns_line.get_text() as int
@@ -209,8 +347,10 @@ func open_csv_file(filepath : String, csv_delimiter : String = ";") -> void:
 				rows.append(csv_line)
 	csv.close()
 	
-	columns_count = columns
-	rows_count = rows.size()
+	if columns != 0:
+		columns_count = columns
+	if rows.size() != 0:
+		rows_count = rows.size()
 	
 	load_file_properties()
 	load_file_in_table(rows,columns)
