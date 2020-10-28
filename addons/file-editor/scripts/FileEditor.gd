@@ -28,7 +28,7 @@ var LastOpenedFiles = preload("res://addons/file-editor/scripts/LastOpenedFiles.
 var Preview = preload("res://addons/file-editor/scenes/Preview.tscn")
 var IniEditor = preload("res://addons/file-editor/scenes/IniEditor.tscn")
 var VanillaEditor = preload("res://addons/file-editor/scenes/VanillaEditor.tscn")
-var CsvEditor = preload("res://addons/file-editor/scenes/CsvEditor.tscn")
+var CsvEditor = preload("res://addons/file-editor/scenes/CSVEditor.tscn")
 
 onready var EditorContainer = $FileEditorContainer/SplitContainer
 
@@ -63,7 +63,7 @@ var current_file_path = ""
 var save_as = false
 var current_editor : Control
 var current_ini_editor : Control
-var current_csv_editor : Control
+var current_csv_editor : CSVEditor
 var current_font : DynamicFont
 
 func _ready():
@@ -78,70 +78,69 @@ func _ready():
 	var opened_files : Array = LastOpenedFiles.load_opened_files()
 	for opened_file in opened_files:
 		open_file(opened_file[1], opened_file[2])
-		
 	FileList.set_filters(EXTENSIONS)
 
 func create_shortcuts():
-		var hotkey
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_S
-		hotkey.control = true
-		FileBTN.set_item_accelerator(4,hotkey.get_scancode_with_modifiers()) # save file
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_N
-		hotkey.control = true
-		FileBTN.set_item_accelerator(0,hotkey.get_scancode_with_modifiers()) # new file
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_O
-		hotkey.control = true
-		FileBTN.set_item_accelerator(1,hotkey.get_scancode_with_modifiers()) # open file
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_D
-		hotkey.control = true
-		FileBTN.set_item_accelerator(6,hotkey.get_scancode_with_modifiers()) # delete file
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_S
-		hotkey.control = true
-		hotkey.alt = true
-		FileBTN.set_item_accelerator(5,hotkey.get_scancode_with_modifiers()) #save file as
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_C
-		hotkey.control = true
-		hotkey.alt = true
-		FileBTN.set_item_accelerator(2,hotkey.get_scancode_with_modifiers()) # close file
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_F
-		hotkey.control = true
-		FileBTN.set_item_accelerator(8,hotkey.get_scancode_with_modifiers()) # search
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_R
-		hotkey.control = true
-		FileBTN.set_item_accelerator(9,hotkey.get_scancode_with_modifiers()) # replace
-		
-		# vanilla editor -----------------------
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_1
-		hotkey.control = true
-		EditorBTN.set_item_accelerator(0,hotkey.get_scancode_with_modifiers()) # vanilla editor
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_2
-		hotkey.control = true
-		EditorBTN.set_item_accelerator(1,hotkey.get_scancode_with_modifiers()) # csv editor
-		
-		hotkey = InputEventKey.new()
-		hotkey.scancode = KEY_3
-		hotkey.control = true
-		EditorBTN.set_item_accelerator(2,hotkey.get_scancode_with_modifiers()) # inieditor editor
+	var hotkey
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_S
+	hotkey.control = true
+	FileBTN.set_item_accelerator(4,hotkey.get_scancode_with_modifiers()) # save file
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_N
+	hotkey.control = true
+	FileBTN.set_item_accelerator(0,hotkey.get_scancode_with_modifiers()) # new file
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_O
+	hotkey.control = true
+	FileBTN.set_item_accelerator(1,hotkey.get_scancode_with_modifiers()) # open file
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_D
+	hotkey.control = true
+	FileBTN.set_item_accelerator(6,hotkey.get_scancode_with_modifiers()) # delete file
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_S
+	hotkey.control = true
+	hotkey.alt = true
+	FileBTN.set_item_accelerator(5,hotkey.get_scancode_with_modifiers()) #save file as
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_C
+	hotkey.control = true
+	hotkey.alt = true
+	FileBTN.set_item_accelerator(2,hotkey.get_scancode_with_modifiers()) # close file
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_F
+	hotkey.control = true
+	FileBTN.set_item_accelerator(8,hotkey.get_scancode_with_modifiers()) # search
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_R
+	hotkey.control = true
+	FileBTN.set_item_accelerator(9,hotkey.get_scancode_with_modifiers()) # replace
+
+	# vanilla editor -----------------------
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_1
+	hotkey.control = true
+	EditorBTN.set_item_accelerator(0,hotkey.get_scancode_with_modifiers()) # vanilla editor
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_2
+	hotkey.control = true
+	EditorBTN.set_item_accelerator(1,hotkey.get_scancode_with_modifiers()) # csv editor
+
+	hotkey = InputEventKey.new()
+	hotkey.scancode = KEY_3
+	hotkey.control = true
+	EditorBTN.set_item_accelerator(2,hotkey.get_scancode_with_modifiers()) # inieditor editor
 
 func load_icons():
 	$FileEditorContainer/TobBar/file_btn.icon = IconLoader.load_icon_from_name("file")
@@ -261,28 +260,26 @@ func _on_previewbtn_pressed(id : int):
 				json_preview()
 
 func _on_editorbtn_pressed(index : int):
-		match index:
-				0:
-						if not current_editor.visible:
-								current_editor.show()
-								if current_csv_editor:
-										current_csv_editor.hide()
-								if current_ini_editor:
-										current_ini_editor.hide()
-				1:
-						if current_csv_editor and not current_csv_editor.visible:
-								if current_ini_editor:
-										current_ini_editor.hide()
-								current_editor.hide()
-								current_csv_editor = open_in_csveditor(current_file_path)
-								current_csv_editor.show()
-				2:
-						if current_ini_editor and not current_ini_editor.visible:
-								current_editor.hide()
-								if current_csv_editor:
-										current_csv_editor.hide()
-								current_ini_editor = open_in_inieditor(current_file_path)
-								current_ini_editor.show()
+	match index:
+		0:
+			if not current_editor.visible:
+				current_editor.show()
+				if current_csv_editor:
+					current_csv_editor.hide()
+				if current_ini_editor:
+					current_ini_editor.hide()
+		1:
+			if current_csv_editor and not current_csv_editor.visible:
+				if current_ini_editor:
+					current_ini_editor.hide()
+				current_editor.hide()
+				current_csv_editor.show()
+		2:
+			if current_ini_editor and not current_ini_editor.visible:
+				current_editor.hide()
+				if current_csv_editor:
+					current_csv_editor.hide()
+				current_ini_editor.show()
 
 func _on_settingsbtn_pressed(index : int):
 	match index:
@@ -298,62 +295,62 @@ func _on_font_selected(font_path : String):
 #	current_font = dynamic_font
 
 func _on_fileitem_pressed(index : int):
-		current_file_index = index
-		var selected_item_metadata = OpenFileList.get_item_metadata(current_file_index)
-		var extension = selected_item_metadata[0].current_path.get_file().get_extension()
-		
-		current_file_path = selected_item_metadata[0].current_path
-		if current_editor.visible:
-				current_editor.hide()
-				current_editor = selected_item_metadata[0]
-				current_editor.show()
-				OpenFileName.set_text(current_editor.current_path)
-				current_csv_editor = selected_item_metadata[2]
-				current_ini_editor = selected_item_metadata[1]
-				if WrapBTN.get_selected_id() == 1:
-						current_editor.set_wrap_enabled(true)
-				else:
-						current_editor.set_wrap_enabled(false)
-				if MapBTN.get_selected_id() == 1:
-						current_editor.draw_minimap(true)
-				else:
-						current_editor.draw_minimap(false)
-		elif current_csv_editor and current_csv_editor.visible:
-				if extension == "csv":
-						current_csv_editor.hide()
-						current_csv_editor = selected_item_metadata[2]
-						current_csv_editor.show()
-						OpenFileName.set_text(current_csv_editor.current_file_path)
-						current_editor = selected_item_metadata[0]
-						current_ini_editor = selected_item_metadata[1]
-				else:
-						if current_csv_editor:
-								current_csv_editor.hide()
-						current_csv_editor = selected_item_metadata[2]
-						if current_ini_editor:
-								current_ini_editor.hide()
-						current_ini_editor = selected_item_metadata[1]
-						current_editor.hide()
-						current_editor = selected_item_metadata[0]
-						current_editor.show()
-						OpenFileName.set_text(current_editor.current_path)
-		elif current_ini_editor and current_ini_editor.visible:
-				if extension == "cfg" or extension == "ini":
-						current_ini_editor.hide()
-						current_ini_editor = selected_item_metadata[1]
-						current_ini_editor.show()
-						OpenFileName.set_text(current_ini_editor.current_file_path)
-				else:
-						if current_ini_editor:
-								current_ini_editor.hide()
-						current_ini_editor = selected_item_metadata[1]
-						if current_csv_editor:
-								current_csv_editor.hide()
-						current_csv_editor = selected_item_metadata[2]
-						current_editor.hide()
-						current_editor = selected_item_metadata[0]
-						current_editor.show()
-						OpenFileName.set_text(current_editor.current_path)
+	current_file_index = index
+	var selected_item_metadata = OpenFileList.get_item_metadata(current_file_index)
+	var extension = selected_item_metadata[0].current_path.get_file().get_extension()
+	
+	current_file_path = selected_item_metadata[0].current_path
+	if current_editor.visible:
+		current_editor.hide()
+		current_editor = selected_item_metadata[0]
+		current_editor.show()
+		OpenFileName.set_text(current_editor.current_path)
+		current_csv_editor = selected_item_metadata[2]
+		current_ini_editor = selected_item_metadata[1]
+		if WrapBTN.get_selected_id() == 1:
+			current_editor.set_wrap_enabled(true)
+		else:
+			current_editor.set_wrap_enabled(false)
+		if MapBTN.get_selected_id() == 1:
+			current_editor.draw_minimap(true)
+		else:
+			current_editor.draw_minimap(false)
+	elif current_csv_editor and current_csv_editor.visible:
+		if extension == "csv":
+			current_csv_editor.hide()
+			current_csv_editor = selected_item_metadata[2]
+			current_csv_editor.show()
+			OpenFileName.set_text(current_csv_editor.current_file_path)
+			current_editor = selected_item_metadata[0]
+			current_ini_editor = selected_item_metadata[1]
+		else:
+			if current_csv_editor:
+				current_csv_editor.hide()
+			current_csv_editor = selected_item_metadata[2]
+			if current_ini_editor:
+				current_ini_editor.hide()
+			current_ini_editor = selected_item_metadata[1]
+			current_editor.hide()
+			current_editor = selected_item_metadata[0]
+			current_editor.show()
+			OpenFileName.set_text(current_editor.current_path)
+	elif current_ini_editor and current_ini_editor.visible:
+		if extension == "cfg" or extension == "ini":
+			current_ini_editor.hide()
+			current_ini_editor = selected_item_metadata[1]
+			current_ini_editor.show()
+			OpenFileName.set_text(current_ini_editor.current_file_path)
+		else:
+			if current_ini_editor:
+				current_ini_editor.hide()
+			current_ini_editor = selected_item_metadata[1]
+			if current_csv_editor:
+				current_csv_editor.hide()
+			current_csv_editor = selected_item_metadata[2]
+			current_editor.hide()
+			current_editor = selected_item_metadata[0]
+			current_editor.show()
+			OpenFileName.set_text(current_editor.current_path)
 
 func open_file(path : String, font : String = "null"):
 	if current_file_path != path:
@@ -445,7 +442,7 @@ func open_in_csveditor(path : String) -> Control:
 				csveditor.connect("update_file",self,"_on_update_file")
 				current_csv_editor = csveditor
 				csveditor.current_file_path = path
-				csveditor.open_csv_file(path,"|")
+				csveditor.open_csv_file(path)
 				return csveditor
 		else:
 				current_csv_editor = null
@@ -499,29 +496,33 @@ func create_new_file(given_path : String):
 		open_file(given_path)
 
 func save_file(current_path : String):
-		var current_file = File.new()
-		current_file.open(current_path,File.WRITE)
-		var current_content = ""
-		var lines = current_editor.get_node("TextEditor").get_line_count()
-		for line in range(0,lines):
-				current_content = current_editor.get_node("TextEditor").get_text()
-				current_file.store_line(current_editor.get_node("TextEditor").get_line(line))
-		current_file.close()
-		
-		current_file_path = current_path
-		
-		var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(current_file_path))
-		
-		current_editor.update_lastmodified(last_modified,"save")
-		OpenFileList.set_item_metadata(current_file_index,[current_editor,current_ini_editor,current_csv_editor])
-		print(OpenFileList.get_item_metadata(current_file_index))
-		
-		if OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
-				OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index).rstrip("(*)"))
-		
+	print("Saving file: ",current_path)
+	var current_file = File.new()
+	current_file.open(current_path,File.WRITE)
+	var current_content = ""
+	var lines = current_editor.get_node("TextEditor").get_line_count()
+	for line in range(0,lines):
+		if current_editor.get_node("TextEditor").get_line(line) == "":
+			continue
+		current_content = current_editor.get_node("TextEditor").get_text()
+		current_file.store_line(current_editor.get_node("TextEditor").get_line(line))
+	current_file.close()
+	
+	current_file_path = current_path
+	
+	var last_modified = OS.get_datetime_from_unix_time(current_file.get_modified_time(current_file_path))
+	
+	current_editor.update_lastmodified(last_modified,"save")
+	if current_csv_editor != null and not current_csv_editor.is_visible():
+		current_csv_editor.open_csv_file(current_path)
+	OpenFileList.set_item_metadata(current_file_index,[current_editor,current_ini_editor,current_csv_editor])
+	
+	if OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
+		OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index).rstrip("(*)"))
+	
 #	OpenFileList.set_item_metadata(current_file_index,[current_editor,open_in_inieditor(current_file_path),open_in_csveditor(current_file_path)])
-		
-		update_list()
+	
+	update_list()
 
 func clean_editor() -> void :
 		for inieditor in get_tree().get_nodes_in_group("ini_editor"):

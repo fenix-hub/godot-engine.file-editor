@@ -1,21 +1,16 @@
-<p align="right">
-<a href="https://discord.gg/KnJGY9S">
-  <img src="https://github.com/fenix-hub/ColoredBadges/blob/master/svg/social/discord.svg" alt="react" style="vertical-align:top; margin:6px 4px">
-</a>
-</p>
+Check my **[Discord](https://discord.gg/KnJGY9S)** to stay updated on this repository.
+*(Recommended since the AssetLibrary is not automatically updated)*
 
 This plugin is now supported in [Godot Extended Library Discord](https://discord.gg/JNrcucg), check out the [Godot Extended Library Project](https://github.com/godot-extended-libraries)!
 
-<img src="addons/file-editor/icon.png" width="64" height="64" align="left">
-
-# Godot File Editor
+# Godot Text Editor
 A little plugin to easy-way manage your text files inside your project folder.
 
-Author: *"Nicolo (fenix) Santilio"*  
-Version: *1.8.3*  
-Godot Version: *3.2.3*  
+Author: *"Nicolo (fenix) Santilio"*
+Version: *1.7.1*
+Godot Version: *3.2.1*
 
-**This repository was pushed directly from Godot Engine Editor thanks to this [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**
+**This repository was pushed directly from Godot Engine Editor thanks to [GitHub Integration](https://github.com/fenix-hub/godot-engine.github-integration)!**
 
 ## What is this?
 This is a little plugin I've made to easily edit text files in your project folder.
@@ -55,15 +50,14 @@ You can find this plugin in the AssetLib of Godot Engine Editor. Just download i
 + "*.cfg ; Configuration File"
 + "*.ini ; Initialization File (same as .cfg Configuration File)"
 + "*.csv ; Comma-separated values File"
-+ "*.res ; Resource File"
 
 #### Current version
-To check all the features that are included in the current version, please read the [VERSION file](./VERSION.md)
+To check all the features included in the current version, please read the [VERSION file](./VERSION.md)
 
 #### Upcoming features
 To check all the features I'm currently working on, please read the [TODO file](./TODO.md)
 
 #  Disclaimer
-This addon was built for the intention of my **personal use**. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.
+This addon was built for a **personal use** intention. It was released as an open source plugin in the hope that it could be useful to the Godot Engine Community.
 As a "work in progress" project, there is *no warranty* for any eventual issue and bug that may broke your project.
 I don't assume any responsibility for possible corruptions of your project files. It is always advisable to keep a copy of your files and check any changes.
