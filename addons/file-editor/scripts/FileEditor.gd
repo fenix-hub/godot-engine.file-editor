@@ -434,19 +434,20 @@ func open_in_inieditor(path : String) -> Control:
 				return null
 
 func open_in_csveditor(path : String) -> Control:
-		var extension = path.get_file().get_extension()
-		if extension == "csv":
-				var csveditor = CsvEditor.instance()
-				SplitEditorContainer.add_child(csveditor)
-				csveditor.hide()
-				csveditor.connect("update_file",self,"_on_update_file")
-				current_csv_editor = csveditor
-				csveditor.current_file_path = path
-				csveditor.open_csv_file(path)
-				return csveditor
-		else:
-				current_csv_editor = null
-				return null
+	var extension = path.get_file().get_extension()
+	if extension == "csv":
+		var csveditor = CsvEditor.instance()
+		SplitEditorContainer.add_child(csveditor)
+		csveditor.hide()
+		csveditor.connect("update_file",self,"_on_update_file")
+		csveditor.connect("editing_file",self,"_on_vanillaeditor_text_changed")
+		current_csv_editor = csveditor
+		csveditor.current_file_path = path
+		csveditor.open_csv_file(path)
+		return csveditor
+	else:
+		current_csv_editor = null
+		return null
 
 func close_file(index):
 		LastOpenedFiles.remove_opened_file(index,OpenFileList)
@@ -517,8 +518,8 @@ func save_file(current_path : String):
 		current_csv_editor.open_csv_file(current_path)
 	OpenFileList.set_item_metadata(current_file_index,[current_editor,current_ini_editor,current_csv_editor])
 	
-	if OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
-		OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index).rstrip("(*)"))
+	if OpenFileList.get_item_text(current_file_index).begins_with("(*)"):
+		OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index).lstrip("(*)"))
 	
 #	OpenFileList.set_item_metadata(current_file_index,[current_editor,open_in_inieditor(current_file_path),open_in_csveditor(current_file_path)])
 	
@@ -573,8 +574,8 @@ func json_preview():
 
 
 func _on_vanillaeditor_text_changed():
-		if not OpenFileList.get_item_text(current_file_index).ends_with("(*)"):
-				OpenFileList.set_item_text(current_file_index,OpenFileList.get_item_text(current_file_index)+"(*)")
+	if not OpenFileList.get_item_text(current_file_index).begins_with("(*)"):
+			OpenFileList.set_item_text(current_file_index,"(*)"+OpenFileList.get_item_text(current_file_index))
 
 
 func update_list():

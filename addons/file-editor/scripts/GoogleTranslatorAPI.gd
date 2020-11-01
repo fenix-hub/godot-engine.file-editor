@@ -30,4 +30,4 @@ func request_dummy() -> void:
 func _on_translation_received(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray) -> void:
 #	print("Request Result ", result, " with response code ", response_code)
 	if response_code != 200 : print(JSON.parse(body.get_string_from_utf8()).result)
-	emit_signal("translation_received", JSON.parse(body.get_string_from_utf8()).result)
+	emit_signal("translation_received", [response_code,JSON.parse(body.get_string_from_utf8()).result])
