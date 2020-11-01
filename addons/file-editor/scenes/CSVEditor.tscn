@@ -432,7 +432,6 @@ custom_icons/checked = SubResource( 28 )
 custom_icons/unchecked = SubResource( 30 )
 
 [node name="EditDialog" type="AcceptDialog" parent="."]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

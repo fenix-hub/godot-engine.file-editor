@@ -2,6 +2,8 @@ tool
 extends Control
 class_name CSVEditor
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+
 onready var Columns : HBoxContainer = $Container/Scroll/Columns
 onready var _column_head : VBoxContainer = Columns.get_node("_COLUMN_HEAD")
 onready var _row_label : Label = _column_head.get_node("1")
