@@ -2,6 +2,8 @@ tool
 extends Control
 class_name CSVEditor
 
+var IconLoader = preload("res://addons/file-editor/scripts/IconLoader.gd").new()
+
 onready var Columns : HBoxContainer = $Container/Scroll/Columns
 onready var _column_head : VBoxContainer = Columns.get_node("_COLUMN_HEAD")
 onready var _row_label : Label = _column_head.get_node("1")
@@ -112,7 +114,30 @@ func _connect_signals() -> void:
 	$TranslationDialog/TranslationContainer/Buttons/GetTokenBtn.connect("pressed", how_to, "popup")
 	source_lang_menu.connect("item_selected", self , "_on_source_lang_selected")
 	
-#	GoogleTranslate.connect("translation_received", self, "_on_translation_received")
+	keys_tree.connect("cell_selected", self , "_on_keys_select_all_pressed")
+	target_langs_tree.connect("cell_selected", self , "_on_langs_select_all_pressed")
+
+func _on_keys_select_all_pressed():
+	if keys_tree.get_selected() != keys_tree.get_root():
+		return
+	var check : bool = not keys_tree.get_root().is_checked(0)
+	var first_key : TreeItem = keys_tree.get_root().get_children()
+	set_checked(first_key, check)
+	for key in range(0, keys.size()-1):
+		first_key = set_checked(first_key.get_next(), check)
+
+func _on_langs_select_all_pressed():
+	if target_langs_tree.get_selected() != target_langs_tree.get_root():
+		return
+	var check : bool = not target_langs_tree.get_root().is_checked(0)
+	var first_key : TreeItem = target_langs_tree.get_root().get_children()
+	set_checked(first_key, check)
+	for key in range(0, keys.size()-1):
+		first_key = set_checked(first_key.get_next(), check)
+
+func set_checked(key : TreeItem, to_check : bool) -> TreeItem:
+	if key!=null and key.is_editable(0): key.set_checked(0, to_check)
+	return key
 
 func _load_icons() -> void:
 	$Container/Menu/AlignMenu.set_button_icon(IconLoader.load_icon_from_name("align"))
@@ -427,6 +452,9 @@ func create_key_tree(keys : Array) -> void:
 	keys_tree.set_column_titles_visible(true)
 	keys_tree.set_column_title(0, "Keys to translate")
 	var root : TreeItem = keys_tree.create_item()
+	root.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
+	root.set_text(0, "Select/Deselect All")
+	root.set_editable(0, true)
 	for key in keys:
 		var child : TreeItem = keys_tree.create_item(root)
 		child.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
@@ -434,10 +462,11 @@ func create_key_tree(keys : Array) -> void:
 		child.set_text(0, key)
 
 func create_lang_tree(target_langs : Array) -> void:
-#	target_langs_tree.set_column_titles_visible(true)
-#	target_langs_tree.set_column_title(0, "Keys to translate")
 	target_langs_tree.clear()
 	var root : TreeItem = target_langs_tree.create_item()
+	root.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
+	root.set_text(0, "Select/Deselect All")
+	root.set_editable(0, true)
 	for lang in target_langs:
 		var child : TreeItem = target_langs_tree.create_item(root)
 		child.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)

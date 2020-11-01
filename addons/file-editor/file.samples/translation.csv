@@ -1,0 +1,8 @@
+keys;en;it;da;de;ja;es
+HELLO;"""Hello!""";"""Ciao!""";"""Hej!""";"""Hallo!""";"""こんにちは！""";"""¡Hola!"""
+BYE;"""Bye bye!""";"""Ciao ciao!""";"""Hej hej!""";"""Tschüss!""";"""バイバイ！""";"""¡Adiós!"""
+GOODMORNING;"""Gooedmorning!""";"""Buongiorno!""";"""Gooedmorning!""";"""Guten Morgen!""";"""グーエドモーニング！""";"""¡Buen día!"""
+CONFIRM;"""Confirm this action""";"""Conferma questa azione""";"""Bekræft denne handling""";"""Bestätigen Sie diese Aktion""";"""このアクションを確認します""";"""Confirma esta acción"""
+CANCEL;"""Cancel this action""";"""Annulla questa azione""";"""Annuller denne handling""";"""Brechen Sie diese Aktion ab""";"""このアクションをキャンセルします""";"""Cancelar esta acción"""
+YES;"""Yes, please""";"""Sì grazie""";"""Ja tak""";"""Ja bitte""";"""はい、お願いします""";"""Sí por favor"""
+NO;"""No, thanks""";"""No grazie""";"""Nej tak""";"""Nein Danke""";"""結構です""";"""No, gracias"""

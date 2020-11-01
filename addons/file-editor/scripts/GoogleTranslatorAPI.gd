@@ -1,3 +1,4 @@
+tool
 extends HTTPRequest
 class_name GoogleTranslateAPI
 
