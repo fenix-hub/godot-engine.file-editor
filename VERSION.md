@@ -1,10 +1,10 @@
-**version 0.0.1**
+**version 0.0.1**  
 *added*
 - Plugin Created
 
 -----------------------
 
-**version 0.1.1**
+**version 0.1.1**  
 *added*
 - "Create new File" option
 - "Open File" option
@@ -14,13 +14,13 @@
 
 -----------------------
 
-**version 0.1.2**
+**version 0.1.2**  
 *fixed*
 - Repository Installation, folder order
 
 -----------------------
 
-**version 0.2.5**
+**version 0.2.5**  
 *removed*
 - Old layout
 
@@ -41,7 +41,7 @@
 
 -----------------------
 
-**version 1.2.1**
+**version 1.2.1**   
 *removed*
 - Old layout, the plugin won't appear in docs
 - Icons file extensions, plugin size reduced
@@ -62,7 +62,7 @@
 
 -----------------------
 
-**version 1.4.3**
+**version 1.4.3**  
 *removed*
 - Old layout
 
@@ -88,7 +88,7 @@
 
 -----------------------
 
-**version 1.6.0**
+**version 1.6.0**  
 *fixed*
 - Each opened file now has own editor: unsaved changes are no longer erased if a new file is opened without saving the previous opened file
 
@@ -100,10 +100,39 @@
 
 -----------------------
 
-**version 1.6.4**
+**version 1.6.4**  
 *added*
 - CSV VisualEditor (shortcut *Ctrl+2*):
 	- you can now read and edit CSV files importing them as simple CSV files (and not translate file)
 - MiniMap drawer in VanillaEditor
 - SoftWrap / NoWrap in VanillaEditor
 - **Version 3.2alpha2 supported**
+
+-----------------------
+
+**version 1.8.4**  
+*fixed*  
+- Refactored CsvEditor to CSVEditor. More lightweight and flexible
+- FileEditor code 
+- Plugin's code partially cleaned
+
+*added*
+- Automatic Translation support for CSV files
+- GoogleTranslation API
+- Editor font change, VanillaEditor automatically inherits `Code Font` from editor settings but can be overwritten
+- CSVEditor configuration settings
+
+*removed*  
+// 
+
+-----------------------
+
+**version 1.8.6**  
+*fixed*  
+- Occuring bugs after latest version
+
+*added*
+- "Select/Deselect all" options in Translation tab for CSV files for langs and keys
+
+*removed*  
+- IconLoader as Singleton, now used locally in scripts
