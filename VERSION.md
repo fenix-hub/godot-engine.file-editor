@@ -107,3 +107,32 @@
 - MiniMap drawer in VanillaEditor
 - SoftWrap / NoWrap in VanillaEditor
 - **Version 3.2alpha2 supported**
+
+-----------------------
+
+**version 1.8.4**
+*fixed*  
+- Refactored CsvEditor to CSVEditor. More lightweight and flexible
+- FileEditor code 
+- Plugin's code partially cleaned
+
+*added*
+- Automatic Translation support for CSV files
+- GoogleTranslation API
+- Editor font change, VanillaEditor automatically inherits `Code Font` from editor settings but can be overwritten
+- CSVEditor configuration settings
+
+*removed*  
+// 
+
+-----------------------
+
+**version 1.8.6**
+*fixed*  
+- Occuring bugs after latest version
+
+*added*
+- "Select/Deselect all" options in Translation tab for CSV files for langs and keys
+
+*removed*  
+- IconLoader as Singleton, now used locally in scripts
