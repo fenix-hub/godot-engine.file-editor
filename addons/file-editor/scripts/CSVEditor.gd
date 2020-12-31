@@ -55,7 +55,7 @@ var rows_count : int = 1
 signal update_file()
 signal editing_file()
 
-var GoogleTranslate : GoogleTranslateAPI = GoogleTranslateAPI.new()
+var GoogleTranslate : = GoogleTranslateAPI.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
