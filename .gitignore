@@ -1,5 +1,11 @@
 # Godot-specific ignores
 .import/
+scn/
+.import
+default_env.tres
+icon.png
+icon.png.import
+project.godot
 
 # Imported translations (automatically generated from CSV files)
 *.translation
