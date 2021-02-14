@@ -31,8 +31,6 @@ signal text_changed()
 
 func _ready():
     FileList = get_parent().get_parent().get_parent().get_parent().get_node("FileList")
-    ClosingFile = get_parent().get_parent().get_parent().get_parent().get_node("ConfirmationDialog")
-    ClosingFile.connect("confirmed",self,"queue_free")
     
     ReadOnly.connect("toggled",self,"_on_Readonly_toggled")
     

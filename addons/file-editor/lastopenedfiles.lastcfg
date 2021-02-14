@@ -1,9 +1,6 @@
 [Opened]
 
+translation.csv="res://addons/file-editor/file.samples/translation.csv"
 sample.bbs="res://addons/file-editor/file.samples/sample.bbs"
 sample.cfg="res://addons/file-editor/file.samples/sample.cfg"
-sample.html="res://addons/file-editor/file.samples/sample.html"
 sample.ini="res://addons/file-editor/file.samples/sample.ini"
-sample.md="res://addons/file-editor/file.samples/sample.md"
-sample.txt="res://addons/file-editor/file.samples/sample.txt"
-translation.csv="res://addons/file-editor/file.samples/translation.csv"
