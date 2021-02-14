@@ -205,6 +205,7 @@ custom_colors/font_color = Color( 0.145098, 0.172549, 0.231373, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "Can Edit"
 flat = true
+
 [connection signal="text_changed" from="TextEditor" to="." method="_on_TextEditor_text_changed"]
 [connection signal="focus_entered" from="SearchBox/LineEdit" to="." method="_on_LineEdit_focus_entered"]
 [connection signal="text_changed" from="SearchBox/LineEdit" to="." method="_on_LineEdit_text_changed"]
