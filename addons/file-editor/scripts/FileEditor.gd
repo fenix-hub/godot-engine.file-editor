@@ -578,7 +578,6 @@ func xml_preview():
 func json_preview():
     pass
 
-
 func _on_vanillaeditor_text_changed():
     if not OpenFileList.get_item_text(current_file_index).begins_with("(*)"):
         OpenFileList.set_item_text(current_file_index,"(*)"+OpenFileList.get_item_text(current_file_index))
